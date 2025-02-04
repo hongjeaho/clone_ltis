@@ -1,0 +1,50 @@
+.menuItem {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    font-size: 20px;
+    font-weight: 700;
+    color: #365978;
+    letter-spacing: -0.04em;
+    cursor: pointer;
+}
+
+.menuItem:hover {
+    background: #F3F6FB;
+}
+
+.controllerMenuItem {
+    display: block;
+    width: 160px;
+    padding: 12px;
+    background-color: #fff;
+    border: 1px solid #E7EAF2;
+    box-shadow: 3px 3px 15px rgb(4 80 147 / 4%);
+
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border: 0;
+        font: inherit;
+        background: none;
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #365978;
+            letter-spacing: -0.04em;
+            word-break: keep-all;
+            text-align: left;
+        }
+
+        a:hover {
+            background: #F3F6FB;
+        }
+    }
+}

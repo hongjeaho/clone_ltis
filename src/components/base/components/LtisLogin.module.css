@@ -1,0 +1,32 @@
+.login {
+    display: flex;
+    align-items: center;
+
+    ul {
+        display: flex;
+
+        li:last-child {
+            padding-right: 0;
+            margin-right: 0;
+        }
+        
+        li {
+            position: relative;
+            padding-right: 10px;
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+            letter-spacing: -0.8px;
+            list-style: none;
+
+            a {
+                color: #5A7791;
+            }
+
+            a:link, a:visited {
+                text-decoration: none;
+            }
+        }
+    }
+}

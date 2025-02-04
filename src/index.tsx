@@ -5,9 +5,12 @@ import { RecoilRoot } from 'recoil'
 import reportWebVitals from './reportWebVitals'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Modal from 'react-modal'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const queryClient = new QueryClient()
+
+Modal.setAppElement("#rootModal")
 
 root.render(
   <RecoilRoot>
