@@ -5,7 +5,13 @@ import Header from '../base/Header'
 
 const Base = styled.div``
 const Main = styled.main``
-const Container = styled.div``
+const Container = styled.div`
+  vertical-align: middle;
+  min-height: 356px;
+  width: 1600px;
+  max-width: 1600px;
+  margin: 0 auto;
+`
 
 const BaseLayout: React.FC = () => {
   return (

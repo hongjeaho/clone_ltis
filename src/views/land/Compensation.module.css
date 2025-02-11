@@ -1,0 +1,15 @@
+.tabBox {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tabButton {
+  vertical-align: middle;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222326;
+  letter-spacing: -0.5px;
+  line-height: 50px;
+}
