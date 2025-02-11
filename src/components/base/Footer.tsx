@@ -6,7 +6,7 @@ const Footer = styled.footer`
 `
 
 const Footter: React.FC = () => {
-  return <Footer>&copy; {format(new Date(), 'yyyy.MM.dd')} XX  ㅗㅗㅗ</Footer>
+  return <Footer>&copy; {format(new Date(), 'yyyy.MM.dd')} XX ㅗㅗㅗ</Footer>
 }
 
 export default Footter

@@ -10,7 +10,7 @@ import Modal from 'react-modal'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const queryClient = new QueryClient()
 
-Modal.setAppElement("#rootModal")
+Modal.setAppElement('#rootModal')
 
 root.render(
   <RecoilRoot>
