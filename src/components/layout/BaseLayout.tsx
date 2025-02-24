@@ -2,23 +2,20 @@ import styled from '@emotion/styled/macro'
 import { Outlet } from 'react-router-dom'
 import Footer from '../base/Footer'
 import Header from '../base/Header'
+import Container from '@mui/material/Container'
 
-const Base = styled.div``
-const Main = styled.main``
-const Container = styled.div`
-  vertical-align: middle;
-  min-height: 356px;
-  width: 1600px;
-  max-width: 1600px;
-  margin: 0 auto;
+const Base = styled.div`
+  height: 100%;
+  margin: 0;
 `
+const Main = styled.main``
 
 const BaseLayout: React.FC = () => {
   return (
     <Base>
       <Main>
         <Header />
-        <Container>
+        <Container fixed>
           <Outlet />
         </Container>
         <Footer />
