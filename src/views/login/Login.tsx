@@ -6,6 +6,7 @@ import styles from './Login.module.css'
 import { Link } from 'react-router-dom'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import InputBox from '@/components/base/form/InputBox'
+import { useLogin } from '@/api/authority-api/authority-api'
 
 interface FromProps {
   id: string
@@ -14,6 +15,18 @@ interface FromProps {
 
 const Login: React.FC = () => {
   const setCustomer = useSetRecoilState(customerState)
+  const { mutate } = useLogin({
+    mutation: {
+      onSuccess: data => {
+        setCustomer({ ...data })
+        alert('로그인을 성공 했습니다. 메인 페이지로 이동합니다.')
+      },
+      onError: error => {
+        console.error(error.response?.data)
+        alert('로그인을 실패 하였습니다.')
+      },
+    },
+  })
 
   const {
     handleSubmit,
@@ -28,7 +41,13 @@ const Login: React.FC = () => {
 
   const onSubmit: SubmitHandler<FromProps> = async data => {
     console.log(data)
-    setCustomer({ name: '' })
+    const { id, password } = data
+    mutate({
+      data: {
+        id,
+        password,
+      },
+    })
   }
 
   return (
@@ -74,8 +93,8 @@ const Login: React.FC = () => {
                     rules={{
                       required: '비밀번호를 확인해 주세요.',
                       minLength: {
-                        value: 8,
-                        message: '비밀번호는 8자리 이상이어야 합니다.',
+                        value: 5,
+                        message: '비밀번호는 5자리 이상이어야 합니다.',
                       },
                     }}
                   />

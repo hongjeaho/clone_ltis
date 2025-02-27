@@ -1,8 +1,8 @@
-import { type Customer } from '@/type/Customer'
 import { atom, selector } from 'recoil'
 import { localStorageEffect } from '../recoilEffect'
+import { type AuthUser } from '@/model/authUser'
 
-export const customerState = atom<Customer | null>({
+export const customerState = atom<AuthUser | null>({
   key: 'customer',
   default: null,
   effects: [localStorageEffect('customer')],
