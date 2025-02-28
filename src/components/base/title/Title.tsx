@@ -1,7 +1,7 @@
 import styled from '@emotion/styled/macro'
-import titleImage from './image/b1.jpg'
+import titleImage from './images/b1.jpg'
 
-interface LtisTitleProps {
+interface TitleProps {
   title: string
 }
 
@@ -11,7 +11,7 @@ const Base = styled.div`
   background-image: url(${titleImage});
 `
 
-const Title = styled.h2`
+const H2 = styled.h2`
   width: 100%;
   font-weight: 700;
   text-align: center;
@@ -23,12 +23,12 @@ const Title = styled.h2`
   word-break: keep-all;
 `
 
-const LtisTitle: React.FC<LtisTitleProps> = ({ title }) => {
+const Title: React.FC<TitleProps> = ({ title }) => {
   return (
     <Base>
-      <Title>{title}</Title>
+      <H2>{title}</H2>
     </Base>
   )
 }
 
-export default LtisTitle
+export default Title

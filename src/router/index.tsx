@@ -1,6 +1,5 @@
-import React from 'react'
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import BaseLayout from '@/components/layout/BaseLayout'
+import BaseLayout from '@/layout/BaseLayout'
 
 import land from './land'
 import Home from '@/views/Home'

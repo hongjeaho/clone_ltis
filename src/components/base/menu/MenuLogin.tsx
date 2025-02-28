@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import styles from './LtisLogin.module.css'
+import styles from './MenuLogin.module.css'
 
-const LtisLogin: React.FC = () => {
+const MenuLogin: React.FC = () => {
   return (
     <div className={styles.login}>
       <ul>
@@ -13,4 +13,4 @@ const LtisLogin: React.FC = () => {
   )
 }
 
-export default LtisLogin
+export default MenuLogin

@@ -1,12 +1,13 @@
-import { customerState } from '@/store/customer'
+import { userState } from '@/store/user'
 import { Button, CssBaseline } from '@mui/material'
 import { useSetRecoilState } from 'recoil'
 import Box from '@mui/material/Box'
 import styles from './Login.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import InputBox from '@/components/base/form/InputBox'
+import InputBox from '@/commonComponents/form/InputBox'
 import { useLogin } from '@/api/authority-api/authority-api'
+import { useShowAlertMessage } from '@/store/message'
 
 interface FromProps {
   id: string
@@ -14,16 +15,19 @@ interface FromProps {
 }
 
 const Login: React.FC = () => {
-  const setCustomer = useSetRecoilState(customerState)
+  const navigate = useNavigate()
+  const setCustomer = useSetRecoilState(userState)
+  const showAlertMessage = useShowAlertMessage()
+
   const { mutate } = useLogin({
     mutation: {
       onSuccess: data => {
         setCustomer({ ...data })
-        alert('로그인을 성공 했습니다. 메인 페이지로 이동합니다.')
+        navigate('/')
       },
       onError: error => {
         console.error(error.response?.data)
-        alert('로그인을 실패 하였습니다.')
+        showAlertMessage('아이디 또는 비밀번호를 확인해 주세요')
       },
     },
   })

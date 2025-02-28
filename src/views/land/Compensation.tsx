@@ -1,4 +1,4 @@
-import LtisTitle from '@/components/common/LtisTitle'
+import H2 from '@/components/base/title/Title'
 import CompensationPanel from '@/components/land/compensation/CompensationPanel'
 import ExpropriationPanel from '@/components/land/compensation/ExpropriationPanel'
 import { Box, Tab, Tabs } from '@mui/material'
@@ -14,10 +14,10 @@ const Compensation: React.FC = () => {
 
   return (
     <div>
-      <LtisTitle title="토지수용제도 및 보상금 안내" />
+      <H2 title="토지수용제도 및 보상금 안내" />
 
       <Box className={styles.tabBox}>
-        <Tabs value={value} onChange={handleChange} aria-label="AAABBB">
+        <Tabs value={value} onChange={handleChange} aria-label="토지수용제도 및 보상금 안내">
           <Tab label="토지수용제도란?" className={styles.tabButton} />
           <Tab label="수용보상금액안내" className={styles.tabButton} />
         </Tabs>

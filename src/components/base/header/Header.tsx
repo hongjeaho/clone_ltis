@@ -1,7 +1,8 @@
-import AllMenu from './components/AllMenu'
-import LtisLogin from './components/LtisLogin'
-import LtisMenu from './components/LtisMenu'
+import AllMenu from '../menu/AllMenu'
+
 import styles from './Header.module.css'
+import MenuLogin from '../menu/MenuLogin'
+import MainMenu from '../menu/MainMenu'
 
 const Header: React.FC = () => {
   return (
@@ -15,8 +16,8 @@ const Header: React.FC = () => {
           </h1>
         </div>
         <nav className={styles.nav}>
-          <LtisMenu />
-          <LtisLogin />
+          <MainMenu />
+          <MenuLogin />
           <AllMenu />
         </nav>
       </div>

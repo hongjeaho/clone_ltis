@@ -1,14 +1,14 @@
 import { type PropsWithChildren } from 'react'
 
-interface LtisTabPanelProps extends PropsWithChildren {
+interface TabPanelProps extends PropsWithChildren {
   value: number
   index: number
 }
 
-const LtisTabPanel: React.FC<LtisTabPanelProps> = ({ value, index, children }) => {
+const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
   if (value !== index) return null
 
   return <div role="tabPanel">{children}</div>
 }
 
-export default LtisTabPanel
+export default TabPanel

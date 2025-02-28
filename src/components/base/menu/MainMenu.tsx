@@ -1,25 +1,25 @@
 import { MenuItem } from '@szhsin/react-menu'
-import LtisMenuItem from './LtisMenuItem'
+import MainMenuItem from './MainMenuItem'
 import { Link } from 'react-router-dom'
-import styles from './Ltismenu.module.css'
 import '@szhsin/react-menu/dist/index.css'
 import menuData from '@/data/menu.json'
 import { type Menu, type SubMenu } from '@/type/common/Menu'
+import styles from './MainMenu.module.css'
 
-const LtisMenu: React.FC = () => {
+const MainMenu: React.FC = () => {
   return (
     <div className={styles.menu}>
-      {menuData.map((menu: Menu) => (
-        <LtisMenuItem key={menu.path} name={menu.name}>
-          {menu.sub.map((subMenu: SubMenu) => (
-            <MenuItem key={subMenu.path}>
+      {menuData.map((menu: Menu, index) => (
+        <MainMenuItem key={index} name={menu.name}>
+          {menu.sub.map((subMenu: SubMenu, index) => (
+            <MenuItem key={index}>
               <Link to={subMenu.path}>{subMenu.name}</Link>
             </MenuItem>
           ))}
-        </LtisMenuItem>
+        </MainMenuItem>
       ))}
     </div>
   )
 }
 
-export default LtisMenu
+export default MainMenu

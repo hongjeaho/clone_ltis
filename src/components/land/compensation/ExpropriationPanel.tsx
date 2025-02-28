@@ -1,4 +1,4 @@
-import LtisTabPanel from '@/components/common/LtisTabPanel'
+import TabPanel from '@/commonComponents/form/TabPanel'
 
 interface ExpropriationProps {
   value: number
@@ -7,7 +7,7 @@ interface ExpropriationProps {
 
 const Expropriation: React.FC<ExpropriationProps> = ({ value, index }) => {
   return (
-    <LtisTabPanel value={value} index={index}>
+    <TabPanel value={value} index={index}>
       <section>
         <div>
           <b>
@@ -91,7 +91,7 @@ const Expropriation: React.FC<ExpropriationProps> = ({ value, index }) => {
         </table>
         <div>그 밖에 별표에 규정된 법률에 따라 토지등을 수용하거나 사용할 수 있는 사업(제4조제8호 관련) [시행일: 2022. 6. 16.]&nbsp;&nbsp;&nbsp;</div>
       </section>
-    </LtisTabPanel>
+    </TabPanel>
   )
 }
 

@@ -26,14 +26,14 @@ const MenuPopup: React.FC = () => {
   return (
     <div className={styles.hm_all_menu_wrap}>
       <ul className={styles.hm_all_menu}>
-        {menuData.map((menu: Menu) => (
-          <li key={menu.path}>
+        {menuData.map((menu: Menu, index) => (
+          <li key={index}>
             <strong>
               <Link to={menu.path}>{menu.name}</Link>
             </strong>
             <ul className={styles.hm_all_subMenu}>
-              {menu.sub.map((subMenu: SubMenu) => (
-                <li key={subMenu.path}>
+              {menu.sub.map((subMenu: SubMenu, index) => (
+                <li key={index}>
                   <Link to={subMenu.path}>{subMenu.name}</Link>
                 </li>
               ))}

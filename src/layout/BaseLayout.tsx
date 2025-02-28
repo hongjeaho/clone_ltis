@@ -1,8 +1,8 @@
 import styled from '@emotion/styled/macro'
 import { Outlet } from 'react-router-dom'
-import Footer from '../base/Footer'
-import Header from '../base/Header'
 import Container from '@mui/material/Container'
+import Header from '@/components/base/header/Header'
+import Footer from '@/components/base/footer/Footer'
 
 const Base = styled.div`
   height: 100%;

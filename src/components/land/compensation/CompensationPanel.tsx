@@ -1,4 +1,4 @@
-import LtisTabPanel from '@/components/common/LtisTabPanel'
+import TabPanel from '@/commonComponents/form/TabPanel'
 import { type PropsWithChildren } from 'react'
 
 interface CompensationPanelProps extends PropsWithChildren {
@@ -8,7 +8,7 @@ interface CompensationPanelProps extends PropsWithChildren {
 
 const CompensationPanel: React.FC<CompensationPanelProps> = ({ value, index }) => {
   return (
-    <LtisTabPanel value={value} index={index}>
+    <TabPanel value={value} index={index}>
       <section>
         <div>수용보상금의 결정</div>
         <div>
@@ -107,7 +107,7 @@ const CompensationPanel: React.FC<CompensationPanelProps> = ({ value, index }) =
           <div>※&nbsp;실제의 경작자는 사업인정고시일, 보상계획공고일 당시의 적법한 경작자를 의미</div>
         </div>
       </section>
-    </LtisTabPanel>
+    </TabPanel>
   )
 }
 

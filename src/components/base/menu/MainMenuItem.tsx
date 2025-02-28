@@ -1,12 +1,12 @@
 import { ControlledMenu, useHover } from '@szhsin/react-menu'
 import { type PropsWithChildren, useRef, useState } from 'react'
-import styles from './LtisMenuItem.module.css'
+import styles from './MainMenuItem.module.css'
 
 interface Props {
   name: string
 }
 
-const LtisMenuItem: React.FC<PropsWithChildren<Props>> = ({ name, children }) => {
+const MainMenuItem: React.FC<PropsWithChildren<Props>> = ({ name, children }) => {
   const ref = useRef(null)
   const [isOpen, setOpen] = useState(false)
   const { anchorProps, hoverProps } = useHover(isOpen, setOpen)
@@ -35,4 +35,4 @@ const LtisMenuItem: React.FC<PropsWithChildren<Props>> = ({ name, children }) =>
   )
 }
 
-export default LtisMenuItem
+export default MainMenuItem
