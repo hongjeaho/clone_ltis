@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro'
+
 import titleImage from './images/b1.jpg'
 
 interface TitleProps {

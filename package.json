@@ -29,7 +29,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "eslint-fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
+    "eslint-fix": "eslint --fix --ext .ts,.tsx src",
     "prettier-fix": "prettier --write .",
     "orval-fix": "orval --config ./config/orval.config.ts"
   },
@@ -64,7 +64,7 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.58.0",
     "craco-alias": "^3.0.1",
-    "eslint": "^8.0.1",
+    "eslint": "8.57.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.25.2",
@@ -72,6 +72,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "orval": "^7.5.0",
     "prettier": "^2.8.7"
   }

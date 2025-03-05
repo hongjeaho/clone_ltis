@@ -1,18 +1,22 @@
-import { type PropsWithChildren, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import styled from '@emotion/styled/macro'
+import Container from '@mui/material/Container'
+import { useEffect } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import Footer from '@/components/base/footer/Footer'
+import Header from '@/components/base/header/Header'
 import { type BasicAuthority } from '@/model/basicAuthority'
 import { alertMessageState } from '@/store/message'
 import { isLoginSelector, userAuthoritySelector } from '@/store/user'
 
-type Role = 'DECISION' | 'IMPLEMENT' | 'ADMIN'
+const Base = styled.div`
+  height: 100%;
+  margin: 0;
+`
+const Main = styled.main``
 
-interface Props extends PropsWithChildren {
-  roles: Role[]
-}
-
-const PrivateLayout: React.FC<Props> = ({ roles, children }) => {
+const AuthenticationLayout: React.FC = () => {
   const navigate = useNavigate()
   const isLogin = useRecoilValue<boolean>(isLoginSelector)
   const userAuthority = useRecoilValue<BasicAuthority[]>(userAuthoritySelector)
@@ -44,7 +48,17 @@ const PrivateLayout: React.FC<Props> = ({ roles, children }) => {
     return null
   }
 
-  return <div>{children}</div>
+  return (
+    <Base>
+      <Main>
+        <Header />
+        <Container fixed>
+          <Outlet />
+        </Container>
+        <Footer />
+      </Main>
+    </Base>
+  )
 }
 
-export default PrivateLayout
+export default AuthenticationLayout

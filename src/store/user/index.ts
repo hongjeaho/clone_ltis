@@ -1,7 +1,9 @@
 import { atom, selector } from 'recoil'
-import { localStorageEffect } from '../recoilEffect'
+
 import { type AuthUser } from '@/model/authUser'
 import { type BasicAuthority } from '@/model/basicAuthority'
+
+import { localStorageEffect } from '../recoilEffect'
 
 export const userState = atom<AuthUser | null>({
   key: 'user',

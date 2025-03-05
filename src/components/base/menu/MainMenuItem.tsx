@@ -1,5 +1,6 @@
 import { ControlledMenu, useHover } from '@szhsin/react-menu'
 import { type PropsWithChildren, useRef, useState } from 'react'
+
 import styles from './MainMenuItem.module.css'
 
 interface Props {

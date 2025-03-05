@@ -1,10 +1,13 @@
-import { MenuItem } from '@szhsin/react-menu'
-import MainMenuItem from './MainMenuItem'
-import { Link } from 'react-router-dom'
 import '@szhsin/react-menu/dist/index.css'
+
+import { MenuItem } from '@szhsin/react-menu'
+import { Link } from 'react-router-dom'
+
 import menuData from '@/data/menu.json'
 import { type Menu, type SubMenu } from '@/type/common/Menu'
+
 import styles from './MainMenu.module.css'
+import MainMenuItem from './MainMenuItem'
 
 const MainMenu: React.FC = () => {
   return (

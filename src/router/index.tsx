@@ -1,12 +1,13 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import BaseLayout from '@/layout/BaseLayout'
 
-import land from './land'
-import Home from '@/views/Home'
-import info from './info'
-import Login from '@/views/login/Login'
+import BaseLayout from '@/layout/BaseLayout'
 import Detail from '@/views/Detail'
 import ErrorPage from '@/views/ErrorPage'
+import Home from '@/views/Home'
+import Login from '@/views/login/Login'
+
+import info from './info'
+import land from './land'
 
 const router: RouteObject[] = [
   {

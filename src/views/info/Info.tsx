@@ -1,5 +1,6 @@
-import { userState } from '@/store/user'
 import { useRecoilValue } from 'recoil'
+
+import { userState } from '@/store/user'
 
 const Info: React.FC = () => {
   const customer = useRecoilValue(userState)

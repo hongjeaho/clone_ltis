@@ -1,8 +1,10 @@
+import { Box, Tab, Tabs } from '@mui/material'
+import { type SyntheticEvent, useState } from 'react'
+
 import H2 from '@/components/base/title/Title'
 import CompensationPanel from '@/components/land/compensation/CompensationPanel'
 import ExpropriationPanel from '@/components/land/compensation/ExpropriationPanel'
-import { Box, Tab, Tabs } from '@mui/material'
-import { type SyntheticEvent, useState } from 'react'
+
 import styles from './Compensation.module.css'
 
 const Compensation: React.FC = () => {

@@ -1,8 +1,8 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-
-import { CiWarning } from 'react-icons/ci'
 import { useEffect, useState } from 'react'
+import { CiWarning } from 'react-icons/ci'
 import { useRecoilState } from 'recoil'
+
 import { alertMessageState } from '@/store/message'
 
 const AlertMessage: React.FC = () => {

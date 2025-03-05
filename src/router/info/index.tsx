@@ -1,13 +1,15 @@
+import AuthenticationLayout from '@/layout/AuthenticationLayout'
 import Info from '@/views/info/Info'
-import PrivateLayout from '@/layout/PrivateLayout'
 
 export default [
   {
     path: 'info',
-    element: (
-      <PrivateLayout roles={['ADMIN']}>
-        <Info />
-      </PrivateLayout>
-    ),
+    element: <AuthenticationLayout />,
+    Children: [
+      {
+        path: '',
+        element: <Info />,
+      },
+    ],
   },
 ]
