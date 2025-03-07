@@ -3,7 +3,7 @@ import styled from '@emotion/styled/macro'
 import titleImage from './images/b1.jpg'
 
 interface TitleProps {
-  title: string
+  text?: string
 }
 
 const Base = styled.div`
@@ -24,10 +24,11 @@ const H2 = styled.h2`
   word-break: keep-all;
 `
 
-const Title: React.FC<TitleProps> = ({ title }) => {
+const Title: React.FC<TitleProps> = ({ text }) => {
+  if (text === undefined) return null
   return (
     <Base>
-      <H2>{title}</H2>
+      <H2>{text}</H2>
     </Base>
   )
 }

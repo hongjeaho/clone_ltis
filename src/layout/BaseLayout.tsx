@@ -1,5 +1,4 @@
 import styled from '@emotion/styled/macro'
-import Container from '@mui/material/Container'
 import { Outlet } from 'react-router-dom'
 
 import Footer from '@/components/base/footer/Footer'
@@ -16,9 +15,7 @@ const BaseLayout: React.FC = () => {
     <Base>
       <Main>
         <Header />
-        <Container fixed>
-          <Outlet />
-        </Container>
+        <Outlet />
         <Footer />
       </Main>
     </Base>

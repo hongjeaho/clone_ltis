@@ -6,6 +6,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { useLogin } from '@/api/authority-api/authority-api'
 import InputBox from '@/commonComponents/form/InputBox'
+import Loading from '@/commonComponents/Loading'
 import { useShowAlertMessage } from '@/store/message'
 import { userState } from '@/store/user'
 
@@ -21,14 +22,19 @@ const Login: React.FC = () => {
   const setCustomer = useSetRecoilState(userState)
   const showAlertMessage = useShowAlertMessage()
 
-  const { mutate } = useLogin({
+  const { mutate, isPending } = useLogin({
     mutation: {
       onSuccess: data => {
         setCustomer({ ...data })
         navigate('/')
       },
       onError: error => {
-        console.error(error.response?.data)
+        const { code } = error
+        if (code === 'ERR_NETWORK') {
+          showAlertMessage('서버 연결이 불안전 합니다. 나중에 다시 시도해 주세요')
+          return
+        }
+
         showAlertMessage('아이디 또는 비밀번호를 확인해 주세요')
       },
     },
@@ -46,7 +52,6 @@ const Login: React.FC = () => {
   })
 
   const onSubmit: SubmitHandler<FromProps> = async data => {
-    console.log(data)
     const { id, password } = data
     mutate({
       data: {
@@ -58,6 +63,7 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.base}>
+      <Loading isShow={isPending} message="로그인 시도중 입니다." />
       <div className={styles.logo}>
         <h1>
           <Link to="/" title="심의지원 시스템">

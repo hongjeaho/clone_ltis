@@ -14,7 +14,9 @@ const AlertMessage: React.FC = () => {
     if (typeof alertMessage.onCallBack === 'function') {
       alertMessage.onCallBack()
     }
-    setAlertMessage({ message: null })
+    setTimeout(() => {
+      setAlertMessage({ message: null })
+    }, 150) // 150ms 후에 message를 null로 설정
   }
 
   useEffect(() => {

@@ -1,11 +1,8 @@
 import styled from '@emotion/styled/macro'
-import Container from '@mui/material/Container'
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import Footer from '@/components/base/footer/Footer'
-import Header from '@/components/base/header/Header'
 import { type BasicAuthority } from '@/model/basicAuthority'
 import { alertMessageState } from '@/store/message'
 import { isLoginSelector, userAuthoritySelector } from '@/store/user'
@@ -14,7 +11,6 @@ const Base = styled.div`
   height: 100%;
   margin: 0;
 `
-const Main = styled.main``
 
 const AuthenticationLayout: React.FC = () => {
   const navigate = useNavigate()
@@ -50,13 +46,7 @@ const AuthenticationLayout: React.FC = () => {
 
   return (
     <Base>
-      <Main>
-        <Header />
-        <Container fixed>
-          <Outlet />
-        </Container>
-        <Footer />
-      </Main>
+      <Outlet />
     </Base>
   )
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import menuData from '@/data/menu.json'
+import { menuState } from '@/components/base/menu/menuData'
 import { type Menu, type SubMenu } from '@/type/common/Menu'
 
 import styles from './AllMenu.module.css'
@@ -28,7 +28,7 @@ const MenuPopup: React.FC = () => {
   return (
     <div className={styles.hm_all_menu_wrap}>
       <ul className={styles.hm_all_menu}>
-        {menuData.map((menu: Menu, index) => (
+        {menuState.map((menu: Menu, index) => (
           <li key={index}>
             <strong>
               <Link to={menu.path}>{menu.name}</Link>
