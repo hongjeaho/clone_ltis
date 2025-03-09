@@ -1,5 +1,5 @@
 import AuthenticationLayout from '@/layout/AuthenticationLayout'
-import ApplicationList from '@/views/implementer/ApplicationList'
+import Application from '@/views/implementer/Application'
 
 export default [
   {
@@ -8,7 +8,7 @@ export default [
     children: [
       {
         path: 'application',
-        element: <ApplicationList />,
+        element: <Application />,
         meta: { title: 'LTIS 정보 입력' },
       },
     ],

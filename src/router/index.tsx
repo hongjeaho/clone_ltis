@@ -14,7 +14,7 @@ const router: RouteObject[] = [
     element: <BaseLayout />,
     children: [
       {
-        path: '',
+        index: true,
         element: <Home />,
       },
       ...land,
@@ -28,4 +28,14 @@ const router: RouteObject[] = [
   },
 ]
 
-export default createBrowserRouter(router)
+const options = {
+  future: {
+    v7_relativeSplatPath: true,
+    v7_fetcherPersist: true,
+    v7_normalizeFormMethod: true,
+    v7_partialHydration: true,
+    v7_skipActionErrorRevalidation: true,
+  },
+}
+
+export default createBrowserRouter(router, options)

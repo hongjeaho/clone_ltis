@@ -17,7 +17,7 @@ Modal.setAppElement('#rootModal')
 root.render(
   <RecoilRoot>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
       <AlertMessage />
     </QueryClientProvider>
   </RecoilRoot>,

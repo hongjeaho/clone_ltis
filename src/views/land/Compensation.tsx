@@ -4,13 +4,11 @@ import { type SyntheticEvent, useState } from 'react'
 import Title from '@/components/base/title/Title'
 import CompensationPanel from '@/components/land/compensation/CompensationPanel'
 import ExpropriationPanel from '@/components/land/compensation/ExpropriationPanel'
-import { useTitle } from '@/store'
 
 import styles from './Compensation.module.css'
 
 const Compensation: React.FC = () => {
   const [value, setValue] = useState(0)
-  useTitle('xxxx')
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue)

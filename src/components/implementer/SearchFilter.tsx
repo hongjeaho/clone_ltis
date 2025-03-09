@@ -8,43 +8,33 @@ import Grid from '@mui/material/Grid2'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 import DateRangeBox from '@/commonComponents/form/DateRangeBox'
-import { type FromProps } from '@/type/form/SearchForm'
+import { type GetImplementerApplicationParams } from '@/model'
+import { DecisionStepList } from '@/store'
 
-import InputBox from '../../../commonComponents/form/InputBox'
+import InputBox from '../../commonComponents/form/InputBox'
 
-interface SearchBoxProps {
-  onSubmit: SubmitHandler<FromProps>
+interface SearchFilterProps {
+  onSubmit: SubmitHandler<GetImplementerApplicationParams>
 }
-
-const decisionStepList = [
-  { value: '1', label: '입력정보확인' },
-  { value: '2', label: '재결접수' },
-  { value: '3', label: '열람공고' },
-  { value: '7', label: '열람공고 반려' },
-  { value: '4', label: '재결신청 의견제출' },
-  { value: '5', label: '재결관검토' },
-  { value: '11', label: '재결관검토 반려' },
-  { value: '6', label: '심의' },
-]
 
 const Form = styled.form`
   width: 100%;
 `
 
-const SearchBox: React.FC<SearchBoxProps> = ({ onSubmit }) => {
-  const { handleSubmit, register, control } = useForm<FromProps>({
+const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
+  const { handleSubmit, register, control } = useForm<GetImplementerApplicationParams>({
     defaultValues: {
-      search: '',
-      recepStartDt: '',
-      recepEndDt: '',
+      keyword: '',
+      startRecepDt: '',
+      endRecepDt: '',
       address: '',
-      implementer: '',
+      implementerNm: '',
       decisionStep: [],
     },
   })
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }} width={'100%'} padding={5}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }} padding={2}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Grid container spacing={2} columns={2}>
@@ -66,7 +56,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSubmit }) => {
             </Grid>
             <Grid size={2}>
               <FormLabel component="legend">심의 진행현황</FormLabel>
-              {decisionStepList.map((step, index) => (
+              {DecisionStepList.map((step, index) => (
                 <FormControlLabel
                   key={`decisionStep${index}`}
                   control={<Checkbox value={step.value} {...register('decisionStep')} />}
@@ -86,4 +76,4 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSubmit }) => {
   )
 }
 
-export default SearchBox
+export default SearchFilter

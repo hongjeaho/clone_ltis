@@ -20,7 +20,7 @@ export const commonOutputConfig: OutputOptions = {
       useQuery: true,
       useMutation: true,
       useInfinite: true,
-      useInfiniteQueryParam: 'nextId',
+      useInfiniteQueryParam: 'page',
       options: {
         staleTime: 10000,
       },
