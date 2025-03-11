@@ -34,7 +34,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
   })
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }} padding={2}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }} paddingLeft={25} paddingRight={25} paddingTop={10}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Grid container spacing={2} columns={2}>
