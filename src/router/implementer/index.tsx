@@ -1,5 +1,6 @@
 import AuthenticationLayout from '@/layout/AuthenticationLayout'
-import Application from '@/views/implementer/Application'
+import ImplementerApplication from '@/views/implementer/ImplementerApplication'
+import ImplementerDetail from '@/views/implementer/ImplementerDetail'
 
 export default [
   {
@@ -8,7 +9,12 @@ export default [
     children: [
       {
         path: 'application',
-        element: <Application />,
+        element: <ImplementerApplication />,
+        meta: { title: 'LTIS 정보 입력' },
+      },
+      {
+        path: 'application/:judgSeq',
+        element: <ImplementerDetail />,
         meta: { title: 'LTIS 정보 입력' },
       },
     ],

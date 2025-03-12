@@ -24,11 +24,11 @@ const Form = styled.form`
 const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
   const { handleSubmit, register, control } = useForm<GetImplementerApplicationParams>({
     defaultValues: {
-      keyword: '',
-      startRecepDt: '',
-      endRecepDt: '',
-      address: '',
-      implementerNm: '',
+      keyword: undefined,
+      startRecepDt: undefined,
+      endRecepDt: undefined,
+      address: undefined,
+      implementerNm: undefined,
       decisionStep: [],
     },
   })
@@ -40,7 +40,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
           <Grid container spacing={2} columns={2}>
             <Grid size={2}>
               <FormLabel component="legend">검색 키워드</FormLabel>
-              <InputBox id="search" placeholder="사건번호 혹은 사업명" type="text" register={register} />
+              <InputBox id="keyword" placeholder="사건번호 혹은 사업명" type="text" register={register} />
             </Grid>
             <Grid size={2}>
               <FormLabel component="legend">접수일</FormLabel>
@@ -52,7 +52,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
             </Grid>
             <Grid size={1}>
               <FormLabel component="legend">시행자명</FormLabel>
-              <InputBox id="implementer" type="text" register={register} />
+              <InputBox id="implementerNm" type="text" register={register} />
             </Grid>
             <Grid size={2}>
               <FormLabel component="legend">심의 진행현황</FormLabel>

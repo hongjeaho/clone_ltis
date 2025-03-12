@@ -4,17 +4,17 @@ import { type SubmitHandler } from 'react-hook-form'
 import { FaRegFilePdf } from 'react-icons/fa6'
 
 import { useGetImplementerApplication } from '@/api/implementer-application-api/implementer-application-api'
-import MuiDataGrid from '@/commonComponents/form/MuiDataGrid'
+import MuiDataGrid from '@/commonComponents/form/MuiDataGrid/MuiDataGrid'
 import Title from '@/components/base/title/Title'
 import SearchBox from '@/components/implementer/SearchFilter'
 import { type GetImplementerApplicationParams } from '@/model/getImplementerApplicationParams'
 
-const Application: React.FC = () => {
+const ImplementerApplication: React.FC = () => {
   const [searchParam, setSearchParam] = useState<GetImplementerApplicationParams>({})
 
   // SearchForm 제출 시 호출되는 함수
   const handleSearchSubmit: SubmitHandler<GetImplementerApplicationParams> = async data => {
-    setSearchParam(data)
+    setSearchParam(params => ({ ...params, ...data, pag: 0, pageSize: 10 }))
   }
 
   // 페이저 번호 설정
@@ -38,7 +38,6 @@ const Application: React.FC = () => {
           <MuiDataGrid
             data={data?.resultList ?? []}
             columns={[
-              { field: 'no', headerName: '순번', width: 90 },
               {
                 field: 'recepDt',
                 headerName: '접수일',
@@ -47,40 +46,49 @@ const Application: React.FC = () => {
               {
                 field: 'chargeNm',
                 headerName: '담당자',
-                width: 100,
+                width: 120,
               },
               {
                 field: 'implementerNm',
                 headerName: '사업시행자',
-                width: 250,
+                width: 280,
               },
               {
                 field: 'caseNo',
                 headerName: '사건번호',
-                width: 100,
+                width: 120,
               },
               {
                 field: 'caseTitle',
                 headerName: '사업명',
-                width: 300,
+                width: 350,
               },
               {
                 field: 'rejectionCnt',
                 headerName: '반려횟수',
                 type: 'number',
-                width: 80,
+                width: 100,
               },
               {
                 field: 'statNm',
-                headerName: 'LTIS 진행상황',
-                type: 'number',
+                headerName: '심의 진행상황',
+                type: 'string',
                 width: 110,
               },
               {
                 field: 'pdfView',
                 headerName: 'PDF 미리보기',
                 align: 'center',
-                renderCell: () => <FaRegFilePdf size={20} style={{ cursor: 'pointer' }} />,
+                renderCell: () => (
+                  <FaRegFilePdf
+                    size={20}
+                    style={{ cursor: 'pointer' }}
+                    onClick={event => {
+                      event.preventDefault()
+                      alert('PDF Down')
+                    }}
+                  />
+                ),
               },
             ]}
             totalPageSzie={data?.total ?? 0} // 전체 카운터
@@ -89,6 +97,8 @@ const Application: React.FC = () => {
             onChangePageSize={onChangePageSize}
             rowId={'judgSeq'} // grid unique
             loading={isLoading}
+            paginationColor="#de017e"
+            paginationTextColor="#fff"
           />
         </Box>
       </Box>
@@ -96,4 +106,4 @@ const Application: React.FC = () => {
   )
 }
 
-export default Application
+export default ImplementerApplication

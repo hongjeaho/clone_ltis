@@ -31,7 +31,7 @@ const MenuPopup: React.FC = () => {
         {menuState.map((menu: Menu, index) => (
           <li key={index}>
             <strong>
-              <Link to={menu.path}>{menu.name}</Link>
+              <>{menu.name}</>
             </strong>
             <ul className={styles.hm_all_subMenu}>
               {menu.sub.map((subMenu: SubMenu, index) => (

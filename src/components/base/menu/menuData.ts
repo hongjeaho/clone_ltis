@@ -1,7 +1,8 @@
-export const menuState = [
+import { type Menu } from '@/type/common/Menu'
+
+export const menuState: Menu[] = [
   {
     name: '토지수용제도안내',
-    path: '/land/compensation',
     sub: [
       { name: '토지수용제도 및 보상금안내', path: '/land/compensation' },
       { name: '수용재결 안내', path: '/land/acceptanceDecision' },
@@ -13,25 +14,21 @@ export const menuState = [
   },
   {
     name: '사업시행자',
-    path: '/',
     sub: [
-      { name: 'LTIS입력정보확인', path: '/implementer/application', role: ['implementer'] },
-      { name: '재결신청 의견제출', path: '' },
+      { name: 'LTIS입력정보확인', path: '/implementer/application', roles: ['IMPLEMENTER'] },
+      { name: '재결신청 의견제출', path: '', roles: ['IMPLEMENTER'] },
     ],
   },
   {
     name: '열람공고',
-    path: '/',
-    sub: [{ name: '열람공고 결과등록', path: '' }],
+    sub: [{ name: '열람공고 결과등록', path: '', roles: ['IMPLEMENTER'] }],
   },
   {
     name: '감정평가사',
-    path: '/',
     sub: [{ name: '재결감정평가 의견등록', path: '' }],
   },
   {
     name: '재결관',
-    path: '/',
     sub: [
       { name: '열람공고 의뢰', path: '' },
       { name: '심의 안건 검토', path: '' },
@@ -42,7 +39,10 @@ export const menuState = [
   },
   {
     name: '심의 위원',
-    path: '/',
     sub: [{ name: '심의안건', path: '' }],
   },
 ]
+
+export const getMenuAuthority = (path: string) => {
+  return menuState.flatMap(menu => menu.sub).find(menu => menu.path === path)?.roles ?? []
+}
