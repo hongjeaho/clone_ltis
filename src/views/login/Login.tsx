@@ -1,3 +1,4 @@
+import InputBox from '@components/common/form/InputBox'
 import { Button, CssBaseline } from '@mui/material'
 import Box from '@mui/material/Box'
 import { type SubmitHandler, useForm } from 'react-hook-form'
@@ -5,8 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 
 import { useLogin } from '@/api/authority-api/authority-api'
-import InputBox from '@/commonComponents/form/InputBox'
-import Loading from '@/commonComponents/Loading'
+import Loading from '@/components//common/Loading'
 import { useShowAlertMessage } from '@/store/message'
 import { userState } from '@/store/user'
 
