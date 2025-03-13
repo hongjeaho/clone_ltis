@@ -1,6 +1,7 @@
-import AllMenu from '../menu/AllMenu'
-import MainMenu from '../menu/MainMenu'
-import MenuLogin from '../menu/MenuLogin'
+import AllMenu from '@components/base/header/menu/AllMenu'
+import MainMenu from '@components/base/header/menu/MainMenu'
+import MenuLogin from '@components/base/header/menu/MenuLogin'
+
 import styles from './Header.module.css'
 
 const Header: React.FC = () => {

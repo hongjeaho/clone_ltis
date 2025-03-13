@@ -1,10 +1,10 @@
+import MuiDataGrid from '@components/common/form/MuiDataGrid/MuiDataGrid'
 import { Box } from '@mui/material'
 import { useCallback, useState } from 'react'
 import { type SubmitHandler } from 'react-hook-form'
 import { FaRegFilePdf } from 'react-icons/fa6'
 
 import { useGetImplementerApplication } from '@/api/implementer-application-api/implementer-application-api'
-import MuiDataGrid from '@/commonComponents/form/MuiDataGrid/MuiDataGrid'
 import Title from '@/components/base/title/Title'
 import SearchBox from '@/components/implementer/SearchFilter'
 import { type GetImplementerApplicationParams } from '@/model/getImplementerApplicationParams'

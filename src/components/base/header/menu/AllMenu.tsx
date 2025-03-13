@@ -1,7 +1,7 @@
+import { menuState } from '@components/base/header/menu/menuData'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { menuState } from '@/components/base/menu/menuData'
 import { type Menu, type SubMenu } from '@/type/common/Menu'
 
 import styles from './AllMenu.module.css'

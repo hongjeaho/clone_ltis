@@ -3,7 +3,7 @@ import styled from '@emotion/styled/macro'
 
 import { ImplementerStepList } from '@/store'
 
-interface ImplementerStepProps {
+interface DecisionStepProps {
   step: string
 }
 
@@ -14,7 +14,7 @@ const StepBase = styled.div`
   text-align: center;
 `
 
-const ImplementerStep: React.FC<ImplementerStepProps> = ({ step }) => {
+const DecisionStep: React.FC<DecisionStepProps> = ({ step }) => {
   return (
     <StepBase>
       <ol>
@@ -34,7 +34,7 @@ interface ImplementerItemProps {
   activeStep: string
 }
 
-const StemItemWapper = styled.li`
+const StemItemWrapper = styled.li`
   display: inline;
   float: left;
   position: relative;
@@ -102,15 +102,15 @@ const StepItemLabel = styled.span`
 
 const ImplementerItem: React.FC<ImplementerItemProps> = ({ stepItem, activeStep }) => {
   return (
-    <StemItemWapper>
+    <StemItemWrapper>
       <StepItem isActive={stepItem.value === activeStep}>
         <StepItemTitle>
           STEP <span>0{stepItem.value}</span>
         </StepItemTitle>
         <StepItemLabel>{stepItem.label}</StepItemLabel>
       </StepItem>
-    </StemItemWapper>
+    </StemItemWrapper>
   )
 }
 
-export default ImplementerStep
+export default DecisionStep

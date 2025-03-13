@@ -1,9 +1,9 @@
 import '@szhsin/react-menu/dist/index.css'
 
+import { menuState } from '@components/base/header/menu/menuData'
 import { MenuItem } from '@szhsin/react-menu'
 import { Link } from 'react-router-dom'
 
-import { menuState } from '@/components/base/menu/menuData'
 import { type Menu, type SubMenu } from '@/type/common/Menu'
 
 import styles from './MainMenu.module.css'

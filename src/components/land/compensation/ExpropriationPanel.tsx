@@ -1,4 +1,4 @@
-import TabPanel from '@/commonComponents/form/TabPanel'
+import TabPanel from '@components/common/form/TabPanel'
 
 interface ExpropriationProps {
   value: number
