@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { getMenuAuthority } from '@/components/base/menu/menuData'
 import { alertMessageState } from '@/store/message'
 import { isLoginSelector, userAuthoritySelector } from '@/store/user'
 
@@ -11,6 +10,10 @@ const Base = styled.div`
   height: 100%;
   margin: 0;
 `
+const menuAuthority: Record<string, string[]> = {
+  implementer: ['IMPLEMENTER'],
+  decision: ['DECISION'],
+}
 
 const AuthenticationLayout: React.FC = () => {
   const navigate = useNavigate()
@@ -30,15 +33,11 @@ const AuthenticationLayout: React.FC = () => {
       message = '로그인이 필요한 페이지입니다.'
     }
 
-    const menuAuthority = getMenuAuthority(location.pathname)
-    const roleCheck = userAuthority?.map(authority => authority.role)?.some(value => menuAuthority.includes(value)) ?? false
+    const path = location.pathname.split('/')[1] ?? 'implementer'
+    const authority: string[] = menuAuthority[`${path}`] ?? []
+    const roleCheck = userAuthority?.map(authority => authority.role)?.some(value => authority.includes(value)) ?? false
 
-    console.log('============[menuAuthority]====================')
-    console.log(menuAuthority)
-    console.log('============[userAuthority]====================')
-    console.log(userAuthority)
-
-    if (!roleCheck) {
+    if (authority.length > 0 && !roleCheck) {
       message = '접근 권한이 없습니다.'
     }
 

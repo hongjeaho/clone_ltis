@@ -6,5 +6,4 @@ export interface Menu {
 export interface SubMenu {
   name: string
   path: string
-  roles?: string[]
 }

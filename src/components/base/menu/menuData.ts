@@ -15,13 +15,13 @@ export const menuState: Menu[] = [
   {
     name: '사업시행자',
     sub: [
-      { name: 'LTIS입력정보확인', path: '/implementer/application', roles: ['IMPLEMENTER'] },
-      { name: '재결신청 의견제출', path: '', roles: ['IMPLEMENTER'] },
+      { name: 'LTIS입력정보확인', path: '/implementer/application' },
+      { name: '재결신청 의견제출', path: '' },
     ],
   },
   {
     name: '열람공고',
-    sub: [{ name: '열람공고 결과등록', path: '', roles: ['IMPLEMENTER'] }],
+    sub: [{ name: '열람공고 결과등록', path: '' }],
   },
   {
     name: '감정평가사',
@@ -42,7 +42,3 @@ export const menuState: Menu[] = [
     sub: [{ name: '심의안건', path: '' }],
   },
 ]
-
-export const getMenuAuthority = (path: string) => {
-  return menuState.flatMap(menu => menu.sub).find(menu => menu.path === path)?.roles ?? []
-}
