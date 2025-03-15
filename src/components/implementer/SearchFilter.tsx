@@ -4,13 +4,14 @@ import styled from '@emotion/styled/macro'
 import { Button, Checkbox, TableRow } from '@mui/material'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 import { type GetImplementerApplicationParams } from '@/model'
 import { DecisionStepList } from '@/store'
 
 import TableBaseLayout from '../common/layout/table/TableBaseLayout'
-import TableItem from '../common/layout/table/TableItem'
+import TableLabelItem from '../common/layout/table/TableLabelItem'
 
 interface SearchFilterProps {
   onSubmit: SubmitHandler<GetImplementerApplicationParams>
@@ -37,25 +38,25 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TableBaseLayout columnSize={4}>
           <TableRow>
-            <TableItem title={'검색 키워드'} colSpan={3}>
+            <TableLabelItem lavel={'검색 키워드'} colSpan={3}>
               <InputBox id="keyword" placeholder="사건번호 혹은 사업명" type="text" register={register} />
-            </TableItem>
+            </TableLabelItem>
           </TableRow>
           <TableRow>
-            <TableItem title={'접수일'} colSpan={3}>
+            <TableLabelItem lavel={'접수일'} colSpan={3}>
               <DateRangeBox control={control} startId="recepStartDt" endId="recepEndDt" />
-            </TableItem>
+            </TableLabelItem>
           </TableRow>
           <TableRow>
-            <TableItem title={'소재지'}>
+            <TableLabelItem lavel={'소재지'}>
               <InputBox id="address" type="text" register={register} />
-            </TableItem>
-            <TableItem title={'시행자명'}>
+            </TableLabelItem>
+            <TableLabelItem lavel={'시행자명'}>
               <InputBox id="implementerNm" type="text" register={register} />
-            </TableItem>
+            </TableLabelItem>
           </TableRow>
           <TableRow>
-            <TableItem title={'심의 진행현황'} colSpan={3}>
+            <TableLabelItem lavel={'심의 진행현황'} colSpan={3}>
               {DecisionStepList.map((step, index) => (
                 <FormControlLabel
                   key={`decisionStep${index}`}
@@ -63,7 +64,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
                   label={step.label}
                 />
               ))}
-            </TableItem>
+            </TableLabelItem>
           </TableRow>
         </TableBaseLayout>
         <Box sx={{ paddingTop: 2 }} display={'flex'} justifyContent={'center'}>

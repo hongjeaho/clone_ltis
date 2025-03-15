@@ -1,6 +1,7 @@
 import styled from '@emotion/styled/macro'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
+import React from 'react'
 
 const Message = styled.div`
   margin-top: 20px;

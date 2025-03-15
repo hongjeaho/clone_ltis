@@ -1,4 +1,5 @@
 import DecisionStep from '@components/common/DecisionStep'
+import AppraisalInfo from '@components/implementer/AppraisalInfo'
 import BusinessInfo from '@components/implementer/BusinessInfo'
 import EtcInfo from '@components/implementer/EtcInfo'
 import ReportInfo from '@components/implementer/ReportInfo'
@@ -17,6 +18,8 @@ const ImplementerDetail: React.FC = () => {
           <BusinessInfo judgSeq={1212} />
           <ReportInfo judgSeq={121212} />
           <EtcInfo judgSeq={121212} />
+
+          <AppraisalInfo judgSeq={121212} />
         </Box>
       </Box>
     </>

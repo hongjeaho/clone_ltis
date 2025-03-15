@@ -1,5 +1,7 @@
 import TableBaseLayout from '@components/common/layout/table/TableBaseLayout'
-import TableItem from '@components/common/layout/table/TableItem'
+import TableLabelItem from '@components/common/layout/table/TableLabelItem'
+import TableRow from '@mui/material/TableRow/TableRow'
+import React from 'react'
 
 interface EdcInfoProps {
   judgSeq: number
@@ -8,7 +10,9 @@ interface EdcInfoProps {
 const EtcInfo: React.FC<EdcInfoProps> = () => {
   return (
     <TableBaseLayout title={'비고'}>
-      <TableItem title={'사업시행자 담당자(연락처)'} value={''} />
+      <TableRow>
+        <TableLabelItem lavel={'사업시행자 담당자(연락처)'} value={''} />
+      </TableRow>
     </TableBaseLayout>
   )
 }

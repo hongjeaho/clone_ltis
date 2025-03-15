@@ -1,28 +1,29 @@
 import TableBaseLayout from '@components/common/layout/table/TableBaseLayout'
-import TableItem from '@components/common/layout/table/TableItem'
+import TableLabelItem from '@components/common/layout/table/TableLabelItem'
 import { TableRow } from '@mui/material'
+import React from 'react'
 import { CgSearch } from 'react-icons/cg'
 
 interface ReportInfoProps {
   judgSeq: number
 }
 
-const ReportInfo: React.FC<ReportInfoProps> = ({ judgSeq }) => {
+const ReportInfo: React.FC<ReportInfoProps> = () => {
   return (
     <TableBaseLayout title={'조서 정보'}>
       <TableRow>
-        <TableItem title={'필지수'} value={''}>
+        <TableLabelItem lavel={'필지수'} value={''}>
           <CgSearch />
-        </TableItem>
-        <TableItem title={'지장물수'} value={''} />
+        </TableLabelItem>
+        <TableLabelItem lavel={'지장물수'} value={''} />
       </TableRow>
       <TableRow>
-        <TableItem title={'필지소유자수'} value={''} />
-        <TableItem title={'지장물소유자수'} value={''} />
+        <TableLabelItem lavel={'필지소유자수'} value={''} />
+        <TableLabelItem lavel={'지장물소유자수'} value={''} />
       </TableRow>
       <TableRow>
-        <TableItem title={'종전금액합계(원)'} value={''} />
-        <TableItem title={'면적'} value={''} />
+        <TableLabelItem lavel={'종전금액합계(원)'} value={''} />
+        <TableLabelItem lavel={'면적'} value={''} />
       </TableRow>
     </TableBaseLayout>
   )

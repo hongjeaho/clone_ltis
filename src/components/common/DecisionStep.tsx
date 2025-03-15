@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled/macro'
+import React from 'react'
 
 import { ImplementerStepList } from '@/store'
 
@@ -51,7 +52,7 @@ const StemItemWrapper = styled.li`
     background-color: #ddd;
   }
 
-  &:first-child:before {
+  &:first-of-type:before {
     display: none;
   }
 `
@@ -65,7 +66,7 @@ const StepItem = styled.div<{ isActive: boolean }>`
   border: #ddd solid 2px;
   border-radius: 100px;
   font-size: 14px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   line-height: 20px;
   text-align: center;
 

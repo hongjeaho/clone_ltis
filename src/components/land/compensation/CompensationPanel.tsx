@@ -1,5 +1,5 @@
 import TabPanel from '@components/common/form/TabPanel'
-import { type PropsWithChildren } from 'react'
+import React, { type PropsWithChildren } from 'react'
 
 interface CompensationPanelProps extends PropsWithChildren {
   value: number

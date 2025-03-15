@@ -1,5 +1,5 @@
 import { Box, Container, Tab, Tabs } from '@mui/material'
-import { type SyntheticEvent, useState } from 'react'
+import React, { type SyntheticEvent, useState } from 'react'
 
 import Title from '@/components/base/title/Title'
 import CompensationPanel from '@/components/land/compensation/CompensationPanel'

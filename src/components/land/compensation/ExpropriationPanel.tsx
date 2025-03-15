@@ -1,4 +1,5 @@
 import TabPanel from '@components/common/form/TabPanel'
+import React from 'react'
 
 interface ExpropriationProps {
   value: number
