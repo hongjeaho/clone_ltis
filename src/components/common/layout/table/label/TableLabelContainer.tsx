@@ -24,7 +24,7 @@ const SubTitle = styled.span`
   padding-top: 10px;
 `
 
-const TableBaseLayout: React.FC<TableLayoutProps> = ({ columnSize = 2, title, subTitle, children }) => {
+const TableLabelContainer: React.FC<TableLayoutProps> = ({ columnSize = 2, title, subTitle, children }) => {
   return (
     <Base>
       <Typography gutterBottom display={'flex'} justifyContent={'space-between'}>
@@ -46,4 +46,4 @@ const TableBaseLayout: React.FC<TableLayoutProps> = ({ columnSize = 2, title, su
     </Base>
   )
 }
-export default TableBaseLayout
+export default TableLabelContainer

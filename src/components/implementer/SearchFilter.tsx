@@ -10,8 +10,8 @@ import { type SubmitHandler, useForm } from 'react-hook-form'
 import { type GetImplementerApplicationParams } from '@/model'
 import { DecisionStepList } from '@/store'
 
-import TableBaseLayout from '../common/layout/table/TableBaseLayout'
-import TableLabelItem from '../common/layout/table/TableLabelItem'
+import TableLabelContainer from '../common/layout/table/label/TableLabelContainer'
+import TableLabelItem from '../common/layout/table/label/TableLabelItem'
 
 interface SearchFilterProps {
   onSubmit: SubmitHandler<GetImplementerApplicationParams>
@@ -36,27 +36,27 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }} paddingTop={2}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <TableBaseLayout columnSize={4}>
+        <TableLabelContainer columnSize={4}>
           <TableRow>
-            <TableLabelItem lavel={'검색 키워드'} colSpan={3}>
+            <TableLabelItem label={'검색 키워드'} colSpan={3}>
               <InputBox id="keyword" placeholder="사건번호 혹은 사업명" type="text" register={register} />
             </TableLabelItem>
           </TableRow>
           <TableRow>
-            <TableLabelItem lavel={'접수일'} colSpan={3}>
+            <TableLabelItem label={'접수일'} colSpan={3}>
               <DateRangeBox control={control} startId="recepStartDt" endId="recepEndDt" />
             </TableLabelItem>
           </TableRow>
           <TableRow>
-            <TableLabelItem lavel={'소재지'}>
+            <TableLabelItem label={'소재지'}>
               <InputBox id="address" type="text" register={register} />
             </TableLabelItem>
-            <TableLabelItem lavel={'시행자명'}>
+            <TableLabelItem label={'시행자명'}>
               <InputBox id="implementerNm" type="text" register={register} />
             </TableLabelItem>
           </TableRow>
           <TableRow>
-            <TableLabelItem lavel={'심의 진행현황'} colSpan={3}>
+            <TableLabelItem label={'심의 진행현황'} colSpan={3}>
               {DecisionStepList.map((step, index) => (
                 <FormControlLabel
                   key={`decisionStep${index}`}
@@ -66,7 +66,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
               ))}
             </TableLabelItem>
           </TableRow>
-        </TableBaseLayout>
+        </TableLabelContainer>
         <Box sx={{ paddingTop: 2 }} display={'flex'} justifyContent={'center'}>
           <Button type="submit" variant="contained" color="primary" size="large" sx={{ width: '150px' }}>
             검색

@@ -1,0 +1,30 @@
+import { TableCell } from '@mui/material'
+import React, { type PropsWithChildren } from 'react'
+
+interface TableItemProps extends PropsWithChildren {
+  label: string
+  width?: number
+  colSpan?: number
+  rowSpan?: number
+}
+
+const TableLabelItem: React.FC<TableItemProps> = ({ colSpan = 1, rowSpan = 1, label }) => {
+  return (
+    <>
+      <TableCell
+        rowSpan={rowSpan}
+        colSpan={colSpan}
+        sx={{
+          backgroundColor: '#e7e8ea',
+          color: '#0663b2',
+          borderBottom: '#9f9f9f solid 1px',
+          textAlign: 'center',
+          padding: '2px',
+        }}
+      >
+        {label}
+      </TableCell>
+    </>
+  )
+}
+export default TableLabelItem

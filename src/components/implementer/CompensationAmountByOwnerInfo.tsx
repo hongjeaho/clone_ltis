@@ -4,19 +4,25 @@ import TableBaseContainer from '@components/common/layout/table/base/TableBaseCo
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
 import TableLabelItem from '@components/common/layout/table/base/TableBaseHeadItem'
 import { TableRow } from '@mui/material'
+import React from 'react'
+import { CgSearch } from 'react-icons/cg'
 
-interface AppraisalInfoProps {
+interface CompensationAmountByOwnerInfoProps {
   judgSeq: number
 }
 
-const AppraisalInfo: React.FC<AppraisalInfoProps> = ({ judgSeq }) => {
+const CompensationAmountByOwnerInfo: React.FC<CompensationAmountByOwnerInfoProps> = () => {
   return (
-    <TableBaseContainer title={'감정평가 정보'}>
+    <TableBaseContainer title={'소유자별 보상액'}>
       <TableBaseHead>
         <TableRow>
-          <TableLabelItem rowSpan={2} label={''} />
+          <TableLabelItem rowSpan={2} label={'연번'} />
+          <TableLabelItem rowSpan={2} label={'소유자'} />
+          <TableLabelItem rowSpan={2} label={'토지'} />
+          <TableLabelItem rowSpan={2} label={'지장물'} />
           <TableLabelItem colSpan={4} label={'합의평가'} />
           <TableLabelItem colSpan={5} label={'경정재결'} />
+          <TableLabelItem rowSpan={2} label={'세부정보'} />
         </TableRow>
         <TableRow>
           <TableLabelItem label={'A'} />
@@ -31,19 +37,25 @@ const AppraisalInfo: React.FC<AppraisalInfoProps> = ({ judgSeq }) => {
         </TableRow>
       </TableBaseHead>
       <TableBaseBody>
-        <TableBaseBodyItem>평가금액(원)</TableBaseBodyItem>
-        <TableBaseBodyItem>-</TableBaseBodyItem>
-        <TableBaseBodyItem>-</TableBaseBodyItem>
-        <TableBaseBodyItem>-</TableBaseBodyItem>
+        <TableBaseBodyItem>1</TableBaseBodyItem>
+        <TableBaseBodyItem>홍길동</TableBaseBodyItem>
+        <TableBaseBodyItem>토지</TableBaseBodyItem>
+        <TableBaseBodyItem>지장물</TableBaseBodyItem>
         <TableBaseBodyItem>111</TableBaseBodyItem>
         <TableBaseBodyItem>111</TableBaseBodyItem>
         <TableBaseBodyItem>111</TableBaseBodyItem>
         <TableBaseBodyItem>111</TableBaseBodyItem>
         <TableBaseBodyItem>111</TableBaseBodyItem>
         <TableBaseBodyItem>111</TableBaseBodyItem>
+        <TableBaseBodyItem>111</TableBaseBodyItem>
+        <TableBaseBodyItem>111</TableBaseBodyItem>
+        <TableBaseBodyItem>111</TableBaseBodyItem>
+        <TableBaseBodyItem>
+          <CgSearch />
+        </TableBaseBodyItem>
       </TableBaseBody>
     </TableBaseContainer>
   )
 }
 
-export default AppraisalInfo
+export default CompensationAmountByOwnerInfo

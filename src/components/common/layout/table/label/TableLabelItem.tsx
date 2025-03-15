@@ -4,7 +4,7 @@ import React, { type PropsWithChildren } from 'react'
 
 interface TableItemProps extends PropsWithChildren {
   width?: number
-  lavel: string
+  label: string
   value?: string
   colSpan?: number
 }
@@ -13,11 +13,18 @@ const TableItemValue = styled(TableCell)`
   border-bottom: '#9f9f9f solid 1px';
 `
 
-const TableLabelItem: React.FC<TableItemProps> = ({ width = 200, colSpan = 1, lavel, value, children }) => {
+const TableLabelItem: React.FC<TableItemProps> = ({ width = 170, colSpan = 1, label, value, children }) => {
   return (
     <>
-      <TableCell width={width} sx={{ backgroundColor: '#e7e8ea', color: '#0663b2', borderBottom: '#9f9f9f solid 1px' }}>
-        {lavel}
+      <TableCell
+        width={width}
+        sx={{
+          backgroundColor: '#e7e8ea',
+          color: '#0663b2',
+          borderBottom: '#9f9f9f solid 1px',
+        }}
+      >
+        {label}
       </TableCell>
       <TableItemValue colSpan={colSpan}>
         {value} {children}

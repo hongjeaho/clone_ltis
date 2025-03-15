@@ -1,5 +1,5 @@
-import TableBaseLayout from '@components/common/layout/table/TableBaseLayout'
-import TableLabelItem from '@components/common/layout/table/TableLabelItem'
+import TableLabelContainer from '@components/common/layout/table/label/TableLabelContainer'
+import TableLabelItem from '@components/common/layout/table/label/TableLabelItem'
 import TableRow from '@mui/material/TableRow/TableRow'
 import React from 'react'
 
@@ -9,11 +9,11 @@ interface EdcInfoProps {
 
 const EtcInfo: React.FC<EdcInfoProps> = () => {
   return (
-    <TableBaseLayout title={'비고'}>
+    <TableLabelContainer title={'비고'}>
       <TableRow>
-        <TableLabelItem lavel={'사업시행자 담당자(연락처)'} value={''} />
+        <TableLabelItem label={'사업시행자 담당자(연락처)'} value={''} />
       </TableRow>
-    </TableBaseLayout>
+    </TableLabelContainer>
   )
 }
 export default EtcInfo
