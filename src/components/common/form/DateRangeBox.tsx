@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { format } from 'date-fns'
 import { ko } from 'date-fns/locale'
 import { type Control, Controller } from 'react-hook-form'
@@ -25,41 +25,41 @@ const DateRangeBox: React.FC<DateRangeBoxProps> = ({ startId, endId, control }) 
   }
 
   return (
-    <Box component="section">
+    <Box component="section" display={'flex'} justifyContent={'flex-start'} gap={2}>
       <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ko}>
-        <DemoContainer components={['DatePicker', 'DatePicker']}>
-          {/* Start Date Picker */}
-          <Controller
-            name={startId}
-            control={control}
-            render={({ field }) => (
-              <DatePicker
-                label="시작일"
-                format={formatPattern}
-                value={new Date(field.value)}
-                onChange={newValue => {
-                  field.onChange(getDateChange(newValue))
-                }}
-              />
-            )}
-          />
+        {/* <DemoContainer components={['DatePicker', 'DatePicker']} > */}
+        {/* Start Date Picker */}
+        <Controller
+          name={startId}
+          control={control}
+          render={({ field }) => (
+            <DatePicker
+              label="시작일"
+              format={formatPattern}
+              value={new Date(field.value)}
+              onChange={newValue => {
+                field.onChange(getDateChange(newValue))
+              }}
+            />
+          )}
+        />
 
-          {/* End Date Picker */}
-          <Controller
-            name={endId}
-            control={control}
-            render={({ field }) => (
-              <DatePicker
-                label="종료일"
-                format={formatPattern}
-                value={new Date(field.value)}
-                onChange={newValue => {
-                  field.onChange(getDateChange(newValue))
-                }}
-              />
-            )}
-          />
-        </DemoContainer>
+        {/* End Date Picker */}
+        <Controller
+          name={endId}
+          control={control}
+          render={({ field }) => (
+            <DatePicker
+              label="종료일"
+              format={formatPattern}
+              value={new Date(field.value)}
+              onChange={newValue => {
+                field.onChange(getDateChange(newValue))
+              }}
+            />
+          )}
+        />
+        {/* </DemoContainer> */}
       </LocalizationProvider>
     </Box>
   )
