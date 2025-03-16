@@ -97,6 +97,7 @@ const Login: React.FC = () => {
                       },
                     }}
                   />
+                  <Box height={5} />
                   <InputBox
                     id="password"
                     label="password"

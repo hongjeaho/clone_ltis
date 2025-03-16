@@ -1,3 +1,4 @@
+import TableTitle from '@components/common/layout/TableTitle'
 import styled from '@emotion/styled/macro'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import React, { type PropsWithChildren } from 'react'
@@ -12,12 +13,7 @@ const Base = styled.div`
   padding-top: 50px;
 `
 
-const Title = styled.span`
-  font-size: 22px;
-  font-weight: 700;
-  color: #274ba9;
-`
-const SubTitle = styled.span`
+const TableSubTitle = styled.span`
   white-space: nowrap;
   font-size: 14px;
   letter-spacing: 0.0357em;
@@ -28,8 +24,8 @@ const TableLabelContainer: React.FC<TableLayoutProps> = ({ columnSize = 2, title
   return (
     <Base>
       <Typography gutterBottom display={'flex'} justifyContent={'space-between'}>
-        <Title>{title}</Title>
-        <SubTitle>{subTitle}</SubTitle>
+        <TableTitle>{title}</TableTitle>
+        <TableSubTitle>{subTitle}</TableSubTitle>
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ tableLayout: 'fixed', borderCollapse: 'collapse' }}>

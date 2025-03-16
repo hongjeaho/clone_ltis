@@ -27,7 +27,7 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
 }) => {
   return (
     <>
-      <FormControl fullWidth={fullWidth} variant="standard">
+      <FormControl fullWidth={fullWidth} variant="standard" sx={{ padding: 0 }}>
         <TextField
           id={id}
           label={label}
@@ -41,6 +41,7 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
           error={error !== undefined}
           helperText={error !== undefined ? error.message : ''}
           focused
+          sx={{ padding: 0, margin: 0 }}
         />
       </FormControl>
     </>
