@@ -7,9 +7,10 @@ import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBod
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
 import TableBaseHeadItem from '@components/common/layout/table/base/TableBaseHeadItem'
-import { Box, TableRow } from '@mui/material'
-import React from 'react'
+import { Box, Button, Divider, TableRow } from '@mui/material'
+import React, { Fragment } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+import { IoAddCircle } from 'react-icons/io5'
 
 import { useInsertDecisionFileUpload } from '@/api/implementer-application-api/implementer-application-api'
 import type { InsertDecisionFileUploadParams } from '@/model'
@@ -84,17 +85,55 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
         </TableBaseHead>
         <TableBaseBody>
           {defaultAttachments.map((item, index) => (
-            <TableRow key={index}>
-              <TableBaseBodyItem align={'left'}>
-                {index + 1}. {item.name}
-              </TableBaseBodyItem>
-              <TableBaseBodyItem>
-                <InputBox id={`implementerUploadFileRequestList.${index}.description`} register={register} type={'text'} />
-              </TableBaseBodyItem>
-              <TableBaseBodyItem>
-                <FileUploadInputBox control={control} id={`implementerUploadFileRequestList.${index}.file`} />
-              </TableBaseBodyItem>
-            </TableRow>
+            <Fragment key={index}>
+              <TableRow>
+                <TableBaseBodyItem align={'left'}>
+                  {index + 1}. {item.name}
+                </TableBaseBodyItem>
+                <TableBaseBodyItem>
+                  <InputBox id={`implementerUploadFileRequestList.${index}.description`} register={register} type={'text'} />
+                </TableBaseBodyItem>
+                <TableBaseBodyItem>
+                  <Box display={'flex'}>
+                    <FileUploadInputBox control={control} id={`implementerUploadFileRequestList.${index}.file`} />
+                    {item.isAddButton && ( // 추가 버튼
+                      <>
+                        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                        <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<IoAddCircle />}>
+                          추가
+                        </Button>
+                      </>
+                    )}
+                  </Box>
+                </TableBaseBodyItem>
+              </TableRow>
+              {item?.sub?.map((subItem, subIndex) => (
+                <TableRow key={subIndex}>
+                  <TableBaseBodyItem></TableBaseBodyItem>
+                  <TableBaseBodyItem>
+                    <InputBox
+                      id={`implementerUploadFileRequestList.${index}.sub.${subIndex}.description`}
+                      placeholder={subItem.description}
+                      register={register}
+                      type={'text'}
+                    />
+                  </TableBaseBodyItem>
+                  <TableBaseBodyItem>
+                    <Box display={'flex'}>
+                      <FileUploadInputBox control={control} id={`implementerUploadFileRequestList.${index}.sub.${subIndex}.file`} />
+                      {subItem.isAddButton && ( // 추가 버튼
+                        <>
+                          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<IoAddCircle />}>
+                            추가
+                          </Button>
+                        </>
+                      )}
+                    </Box>
+                  </TableBaseBodyItem>
+                </TableRow>
+              ))}
+            </Fragment>
           ))}
         </TableBaseBody>
       </TableBaseContainer>

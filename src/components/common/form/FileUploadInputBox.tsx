@@ -1,5 +1,5 @@
 import styled from '@emotion/styled/macro'
-import { Button, Divider, InputBase, Paper } from '@mui/material'
+import { Button, InputBase, Paper } from '@mui/material'
 import React from 'react'
 import { type Control, Controller } from 'react-hook-form'
 import { FaFileUpload } from 'react-icons/fa'
@@ -31,8 +31,8 @@ const FileUploadInputBox: React.FC<FileUploadInputBoxProps> = ({ id, control }) 
               inputProps={{ 'aria-label': '파일을 업로드 해주세요' }}
               disabled
             />
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<FaFileUpload />}>
+              업로드
               <VisuallyHiddenInput
                 type="file"
                 onChange={event => {
