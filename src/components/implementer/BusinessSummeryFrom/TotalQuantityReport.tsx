@@ -43,7 +43,7 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({ handleNext, h
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TableBaseContainer title={`총 물량조서  ${isButtonShown ? 'true' : 'false'}`}>
+      <TableBaseContainer title={`총 물량조서`}>
         <TableBaseHead>
           <TableRow>
             <TableBaseHeadItem rowSpan={2} label={'구분'} />

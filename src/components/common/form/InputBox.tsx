@@ -12,6 +12,7 @@ interface InputBoxProps<T extends FieldValues> {
   placeholder?: string
   rules?: Record<string, any>
   fullWidth?: boolean
+  value?: string
 }
 
 const InputBox: React.FC<InputBoxProps<any>> = ({
@@ -24,6 +25,7 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
   register,
   error,
   rules,
+  value,
 }) => {
   return (
     <>
@@ -35,6 +37,7 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
           placeholder={placeholder}
           disabled={disabled}
           fullWidth={fullWidth}
+          value={value}
           margin="normal"
           variant="outlined"
           {...register(id, rules)}

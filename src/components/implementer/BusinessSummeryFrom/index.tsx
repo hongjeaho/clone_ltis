@@ -3,6 +3,7 @@ import PrevButton from '@components/common/button/PrevButton'
 import BusinessRecognition from '@components/implementer/BusinessSummeryFrom/BusinessRecognition'
 import CompensationAgreement from '@components/implementer/BusinessSummeryFrom/CompensationAgreement'
 import Decision from '@components/implementer/BusinessSummeryFrom/Decision'
+import DecisionFileUpload from '@components/implementer/BusinessSummeryFrom/DecisionFileUpload'
 import TotalQuantityReport from '@components/implementer/BusinessSummeryFrom/TotalQuantityReport'
 import { Box, Step, StepLabel } from '@mui/material'
 import Stepper from '@mui/material/Stepper/Stepper'
@@ -37,6 +38,10 @@ const BusinessSummeryFrom: React.FC = () => {
         label: '협의 내용',
         component: <CompensationAgreement handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 3} />,
       },
+      {
+        label: '첨부파일',
+        component: <DecisionFileUpload handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 4} />,
+      },
       { label: '내용 확인', component: <></> },
     ]
   }, [activeStep])
@@ -62,7 +67,7 @@ const BusinessSummeryFrom: React.FC = () => {
           {step.component}
         </Box>
       ))}
-      {activeStep === 4 && (
+      {activeStep === steps.length - 1 && (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingTop: 4 }}>
           <PrevButton onClick={handleBack} />
           <NextButton onClick={handleNext} label={'검토'} />
