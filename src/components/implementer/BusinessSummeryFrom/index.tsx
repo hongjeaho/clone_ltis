@@ -1,60 +1,74 @@
-import InputBox from '@components/common/form/InputBox'
-import TableLabelContainer from '@components/common/layout/table/label/TableLabelContainer'
-import TableLabelItem from '@components/common/layout/table/label/TableLabelItem'
+import NextButton from '@components/common/button/NextButton'
+import PrevButton from '@components/common/button/PrevButton'
+import BusinessRecognition from '@components/implementer/BusinessSummeryFrom/BusinessRecognition'
+import CompensationAgreement from '@components/implementer/BusinessSummeryFrom/CompensationAgreement'
+import Decision from '@components/implementer/BusinessSummeryFrom/Decision'
 import TotalQuantityReport from '@components/implementer/BusinessSummeryFrom/TotalQuantityReport'
-import { TableRow } from '@mui/material'
-import React from 'react'
-import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
+import { Box, Step, StepLabel } from '@mui/material'
+import Stepper from '@mui/material/Stepper/Stepper'
+import React, { type ReactNode, useMemo, useState } from 'react'
 
-import { type ImplementerApplicationRequest } from '@/model'
+const BusinessSummeryFrom: React.FC = () => {
+  const [activeStep, setActiveStep] = useState(0)
 
-interface BusinessSummeryFromProps {
-  onSubmit: SubmitHandler<ImplementerApplicationRequest>
-}
+  const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1)
+  }
 
-const BusinessSummeryFrom: React.FC<BusinessSummeryFromProps> = ({ onSubmit }) => {
-  const methods = useForm<ImplementerApplicationRequest>()
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1)
+  }
+
+  const steps = useMemo(() => {
+    return [
+      {
+        label: '사업 개요',
+        component: <Decision handleNext={handleNext} isButtonShown={activeStep === 0} />,
+      },
+      {
+        label: `총물량조서`,
+        component: <TotalQuantityReport handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 1} />,
+      },
+      {
+        label: '도시계획',
+        component: <BusinessRecognition handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 2} />,
+      },
+      {
+        label: '협의 내용',
+        component: <CompensationAgreement handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 3} />,
+      },
+      { label: '내용 확인', component: <></> },
+    ]
+  }, [activeStep])
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <TableLabelContainer title={'사업개요'}>
-          <TableRow>
-            <TableLabelItem label={'규모(단위)'}>
-              <InputBox id="decision.scale" placeholder="예) 1.234㎡" type="text" register={methods.register} />
-            </TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'사업 기간'}>
-              <InputBox id="decision.businessPeriod" placeholder="" type="text" register={methods.register} />
-            </TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'총 물량조서'}>
-              <TotalQuantityReport />
-            </TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'사업시행 인가고시일'}></TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'협의 내역'}></TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'재결신청 사유'}></TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'시도지사 추쳔 여부'}></TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'대상 건축물'}></TableLabelItem>
-          </TableRow>
-          <TableRow>
-            <TableLabelItem label={'재결신청 첨부파일'}></TableLabelItem>
-          </TableRow>
-        </TableLabelContainer>
-      </form>
-    </FormProvider>
+    <Box sx={{ width: '100%', paddingTop: 4 }}>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => {
+          const stepProps: { completed?: boolean } = {}
+          const labelProps: {
+            optional?: ReactNode
+          } = {}
+
+          return (
+            <Step key={step.label} {...stepProps}>
+              <StepLabel {...labelProps}>{step.label}</StepLabel>
+            </Step>
+          )
+        })}
+      </Stepper>
+      {steps.map((step, index) => (
+        <Box key={index} sx={{ display: activeStep === index || activeStep === steps.length - 1 ? 'block' : 'none' }}>
+          {step.component}
+        </Box>
+      ))}
+      {activeStep === 4 && (
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingTop: 4 }}>
+          <PrevButton onClick={handleBack} />
+          <NextButton onClick={handleNext} label={'검토'} />
+        </Box>
+      )}
+    </Box>
   )
 }
 

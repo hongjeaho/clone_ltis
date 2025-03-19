@@ -2,13 +2,13 @@ import { TableCell } from '@mui/material'
 import React, { type PropsWithChildren } from 'react'
 
 interface TableItemProps extends PropsWithChildren {
-  label: string
+  label?: string
   width?: number
   colSpan?: number
   rowSpan?: number
 }
 
-const TableLabelItem: React.FC<TableItemProps> = ({ colSpan = 1, rowSpan = 1, label }) => {
+const TableLabelItem: React.FC<TableItemProps> = ({ colSpan = 1, rowSpan = 1, label, children }) => {
   return (
     <>
       <TableCell
@@ -23,6 +23,7 @@ const TableLabelItem: React.FC<TableItemProps> = ({ colSpan = 1, rowSpan = 1, la
         }}
       >
         {label}
+        {children}
       </TableCell>
     </>
   )

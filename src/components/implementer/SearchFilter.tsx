@@ -1,4 +1,4 @@
-import DateRangeBox from '@components/common/form/DateRangeBox'
+import DatePickerRangeBox from '@components/common/form/DatePickerRangeBox'
 import InputBox from '@components/common/form/InputBox'
 import styled from '@emotion/styled/macro'
 import { Button, Checkbox, TableRow } from '@mui/material'
@@ -44,7 +44,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
           </TableRow>
           <TableRow>
             <TableLabelItem label={'접수일'} colSpan={3}>
-              <DateRangeBox control={control} startId="recepStartDt" endId="recepEndDt" />
+              <DatePickerRangeBox control={control} startId="recepStartDt" endId="recepEndDt" />
             </TableLabelItem>
           </TableRow>
           <TableRow>
