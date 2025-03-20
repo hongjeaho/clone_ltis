@@ -1,3 +1,4 @@
+import styled from '@emotion/styled/macro'
 import { FormControl } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { type FieldError, type FieldValues, type UseFormRegister } from 'react-hook-form'
@@ -12,8 +13,13 @@ interface InputBoxProps<T extends FieldValues> {
   placeholder?: string
   rules?: Record<string, any>
   fullWidth?: boolean
-  value?: string
+  value?: string | number
+  hidden?: boolean
 }
+
+const Base = styled.div<{ hidden: boolean }>`
+  display: ${({ hidden }) => (hidden ? 'none' : 'block')};
+`
 
 const InputBox: React.FC<InputBoxProps<any>> = ({
   id,
@@ -26,9 +32,10 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
   error,
   rules,
   value,
+  hidden = false,
 }) => {
   return (
-    <>
+    <Base hidden={hidden}>
       <FormControl fullWidth={fullWidth} variant="standard" sx={{ padding: 0 }}>
         <TextField
           id={id}
@@ -47,7 +54,7 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
           sx={{ padding: 0, margin: 0 }}
         />
       </FormControl>
-    </>
+    </Base>
   )
 }
 
