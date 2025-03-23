@@ -42,6 +42,19 @@ export const request = <T>(options: AxiosRequestConfig): Promise<T> => {
     ...options,
   }
 
+  if (config.method?.toUpperCase() === 'GET') {
+    config.paramsSerializer = paramObj => {
+      const queryString = new URLSearchParams()
+      for (const [key, value] of Object.entries(flatObject(paramObj))) {
+        if (value !== null && value !== undefined && value !== '') {
+          const addKey = key.replace(/\[.+\]/, '')
+          queryString.append(addKey, value)
+        }
+      }
+      return queryString.toString()
+    }
+  }
+
   const source = axios.CancelToken.source()
   const promise = axiosInstance({ ...config, cancelToken: source.token }).then(({ data }) => data)
 
@@ -52,6 +65,25 @@ export const request = <T>(options: AxiosRequestConfig): Promise<T> => {
   }
 
   return promise
+}
+
+const flatObject = (object: Record<string, any>, prefix = '') => {
+  return Object.keys(object).reduce((carry: Record<string, any>, key: string) => {
+    const pre = prefix ? prefix + `.${key}` : ''
+
+    if (Array.isArray(object[key])) {
+      carry = object[key].reduce((array: Record<string, any>, value: any, index: number) => {
+        array[(pre || key) + `[${index}]`] = value
+        return array
+      }, carry)
+    } else if (object[key] && typeof object[key] === 'object') {
+      Object.assign(carry, flatObject(object[key], pre || key))
+    } else {
+      carry[pre || key] = object[key]
+    }
+
+    return carry
+  }, {})
 }
 
 export type ErrorType<Error> = AxiosError<Error>
