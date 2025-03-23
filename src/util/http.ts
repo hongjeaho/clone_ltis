@@ -1,4 +1,9 @@
 import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
+import { useEffect } from 'react'
+import { useSetRecoilState } from 'recoil'
+
+import { useShowAlertMessage } from '@/store/message'
+import { userState } from '@/store/user'
 
 const AUTHORIZATION = 'authorization'
 
@@ -6,36 +11,50 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_BASE_URL,
 })
 
-const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-  const token = localStorage.getItem(AUTHORIZATION) as string | undefined
-  if (token !== undefined) {
-    config.headers.Authorization = `Bearer ${token}`
+export const useAxiosInstance = () => {
+  const showAlertMessage = useShowAlertMessage()
+  const setCustomer = useSetRecoilState(userState)
+
+  const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+    const token = localStorage.getItem(AUTHORIZATION) as string | undefined
+    if (token !== undefined) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    return config
   }
 
-  return config
+  const onResponse = (response: AxiosResponse): AxiosResponse => {
+    const { headers } = response
+
+    if (headers[AUTHORIZATION] !== undefined) {
+      localStorage.setItem(AUTHORIZATION, headers[AUTHORIZATION])
+    }
+    return response
+  }
+
+  const onError = (error: AxiosError | Error): Promise<AxiosError> => {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        const { headers } = error.response
+
+        const isTokenExpired = headers['x-token-expired']
+        if (isTokenExpired === 'true') {
+          showAlertMessage('토큰이 만료 되었습니다.')
+          localStorage.removeItem(AUTHORIZATION)
+          setCustomer(null)
+        }
+      }
+    }
+
+    return Promise.reject(error)
+  }
+
+  useEffect(() => {
+    axiosInstance.interceptors.request.use(onRequest)
+    axiosInstance.interceptors.response.use(onResponse, onError)
+  }, [onRequest, onResponse, onError])
 }
-
-const onResponse = (response: AxiosResponse): AxiosResponse => {
-  const { succeeded, message } = response.data
-  const { headers } = response
-
-  const isTokenExpired = headers['x-token-expired']
-  if (isTokenExpired === 'true') {
-    console.log('만료 처리')
-    localStorage.removeItem(AUTHORIZATION)
-  } else if (succeeded) {
-    throw new Error(message)
-  }
-
-  if (headers[AUTHORIZATION] !== undefined) {
-    localStorage.setItem(AUTHORIZATION, headers[AUTHORIZATION])
-  }
-
-  return response
-}
-
-axiosInstance.interceptors.request.use(onRequest)
-axiosInstance.interceptors.response.use(onResponse)
 
 export const request = <T>(options: AxiosRequestConfig): Promise<T> => {
   const config = {
