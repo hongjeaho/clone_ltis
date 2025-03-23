@@ -1,6 +1,6 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
-import InputBox from '@components/common/form/InputBox'
+import InputTextBox from '@components/common/form/InputTextBox'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
 import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
@@ -11,7 +11,7 @@ import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
 import { useInsertDecisionBusinessRecognition } from '@/api/implementer-application-api/implementer-application-api'
-import type { InsertDecisionBusinessRecognitionParams } from '@/model'
+import { type DecisionBusinessRecognitionEntity } from '@/model'
 import { useShowAlertMessage } from '@/store/message'
 
 interface BusinessRecognitionProps {
@@ -20,9 +20,13 @@ interface BusinessRecognitionProps {
   isButtonShown: boolean
 }
 
+interface BusinessRecognitionParam {
+  decisionBusinessRecognitionList: DecisionBusinessRecognitionEntity[]
+}
+
 const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, handleBack, isButtonShown }) => {
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, control, register } = useForm<InsertDecisionBusinessRecognitionParams>()
+  const { handleSubmit, control, register } = useForm<BusinessRecognitionParam>()
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -38,10 +42,10 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, h
     },
   })
 
-  const onSubmit: SubmitHandler<InsertDecisionBusinessRecognitionParams> = async data => {
+  const onSubmit: SubmitHandler<BusinessRecognitionParam> = async data => {
     mutate({
       judgSeq: 123,
-      params: data,
+      data: data.decisionBusinessRecognitionList,
     })
   }
 
@@ -74,10 +78,10 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, h
           {fields.map((field, index) => (
             <TableRow key={index}>
               <TableBaseBodyItem>
-                <InputBox id={`decisionBusinessRecognitionList.${index}.title`} register={register} type={'text'} />
+                <InputTextBox id={`decisionBusinessRecognitionList.${index}.title`} register={register} type={'text'} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
-                <InputBox id={`decisionBusinessRecognitionList.${index}.content`} register={register} type={'text'} />
+                <InputTextBox id={`decisionBusinessRecognitionList.${index}.content`} register={register} type={'text'} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
                 <Button
@@ -95,7 +99,13 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, h
           ))}
         </TableBaseBody>
       </TableBaseContainer>
-      <Box sx={{ display: isButtonShown ? 'flex' : 'none', justifyContent: 'space-between', paddingTop: 1 }}>
+      <Box
+        sx={{
+          display: isButtonShown ? 'flex' : 'none',
+          justifyContent: 'space-between',
+          paddingTop: 1,
+        }}
+      >
         <PrevButton onClick={handleBack} />
         <NextButton onClick={handleNext} />
       </Box>

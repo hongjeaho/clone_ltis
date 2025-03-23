@@ -1,15 +1,22 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
-import BusinessRecognition from '@components/implementer/BusinessSummeryFrom/BusinessRecognition'
-import CompensationAgreement from '@components/implementer/BusinessSummeryFrom/CompensationAgreement'
-import Decision from '@components/implementer/BusinessSummeryFrom/Decision'
-import DecisionFileUpload from '@components/implementer/BusinessSummeryFrom/DecisionFileUpload'
-import TotalQuantityReport from '@components/implementer/BusinessSummeryFrom/TotalQuantityReport'
+import BusinessRecognition from '@components/submission/BusinessSummeryFrom/BusinessRecognition'
+import CompensationAgreement from '@components/submission/BusinessSummeryFrom/CompensationAgreement'
+import Decision from '@components/submission/BusinessSummeryFrom/Decision'
+import DecisionFileUpload from '@components/submission/BusinessSummeryFrom/DecisionFileUpload'
+import TotalQuantityReport from '@components/submission/BusinessSummeryFrom/TotalQuantityReport'
 import { Box, Step, StepLabel } from '@mui/material'
 import Stepper from '@mui/material/Stepper/Stepper'
 import React, { type ReactNode, useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
+interface Params {
+  judgSeq: number
+}
 
 const BusinessSummeryFrom: React.FC = () => {
+  const { judgSeq } = useParams() as unknown as Readonly<Params>
+
   const [activeStep, setActiveStep] = useState(0)
 
   const handleNext = () => {
@@ -24,7 +31,7 @@ const BusinessSummeryFrom: React.FC = () => {
     return [
       {
         label: '사업 개요',
-        component: <Decision handleNext={handleNext} isButtonShown={activeStep === 0} />,
+        component: <Decision handleNext={handleNext} isButtonShown={activeStep === 0} judgSeq={judgSeq} />,
       },
       {
         label: `총물량조서`,

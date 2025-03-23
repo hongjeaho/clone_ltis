@@ -1,7 +1,7 @@
 import Title from '@components/base/title/Title'
 import DecisionStep from '@components/common/DecisionStep'
-import BusinessSummeryFrom from '@components/implementer/BusinessSummeryFrom'
 import BusinessInfo from '@components/judgInfo/BusinessInfo'
+import BusinessSummeryFrom from '@components/submission/BusinessSummeryFrom'
 import { Button, Stack } from '@mui/material'
 import Box from '@mui/material/Box/Box'
 import React from 'react'

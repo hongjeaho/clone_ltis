@@ -1,4 +1,4 @@
-import InputBox from '@components/common/form/InputBox'
+import InputTextBox from '@components/common/form/InputTextBox'
 import { Button, CssBaseline } from '@mui/material'
 import Box from '@mui/material/Box'
 import React from 'react'
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
             <div>
               <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" className={styles.form}>
                 <div>
-                  <InputBox
+                  <InputTextBox
                     id="id"
                     label="id"
                     type="text"
@@ -98,7 +98,7 @@ const Login: React.FC = () => {
                     }}
                   />
                   <Box height={5} />
-                  <InputBox
+                  <InputTextBox
                     id="password"
                     label="password"
                     type="password"

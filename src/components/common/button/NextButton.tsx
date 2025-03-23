@@ -9,9 +9,10 @@ interface NextButtonProps {
 
 const NextButton: React.FC<NextButtonProps> = ({ type = 'button', label = '다음', onClick }) => {
   return (
-    <Button type={type} size={'large'} variant="contained" onClick={onClick} sx={{ backgroundColor: '#28a745' }}>
+    <Button type={type} size={'large'} variant="contained" sx={{ backgroundColor: '#28a745' }}>
       {label}
     </Button>
   )
 }
+
 export default NextButton

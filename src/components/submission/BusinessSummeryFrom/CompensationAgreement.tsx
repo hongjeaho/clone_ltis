@@ -1,6 +1,6 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
-import InputBox from '@components/common/form/InputBox'
+import InputTextBox from '@components/common/form/InputTextBox'
 import LocalDatePicker from '@components/common/form/LocalDatePicker'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
 import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
@@ -12,7 +12,7 @@ import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
 import { useInsertDecisionCompensationAgreement } from '@/api/implementer-application-api/implementer-application-api'
-import type { InsertDecisionCompensationAgreementParams } from '@/model'
+import { type DecisionCompensationAgreementEntity } from '@/model'
 import { useShowAlertMessage } from '@/store/message'
 
 interface CompensationAgreementProps {
@@ -21,9 +21,13 @@ interface CompensationAgreementProps {
   isButtonShown: boolean
 }
 
+interface CompensationAgreementParam {
+  decisionCompensationAgreementList: DecisionCompensationAgreementEntity[]
+}
+
 const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNext, handleBack, isButtonShown }) => {
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, control, register } = useForm<InsertDecisionCompensationAgreementParams>()
+  const { handleSubmit, control, register } = useForm<CompensationAgreementParam>()
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -39,10 +43,10 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
     },
   })
 
-  const onSubmit: SubmitHandler<InsertDecisionCompensationAgreementParams> = async data => {
+  const onSubmit: SubmitHandler<CompensationAgreementParam> = async data => {
     mutate({
       judgSeq: 123,
-      params: data,
+      data: data.decisionCompensationAgreementList,
     })
   }
 
@@ -78,7 +82,7 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
                 <LocalDatePicker control={control} id={`decisionCompensationAgreementList.${index}.title`} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
-                <InputBox id={`decisionCompensationAgreementList.${index}.content`} register={register} type={'text'} />
+                <InputTextBox id={`decisionCompensationAgreementList.${index}.content`} register={register} type={'text'} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
                 <Button
@@ -96,7 +100,13 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
           ))}
         </TableBaseBody>
       </TableBaseContainer>
-      <Box sx={{ display: isButtonShown ? 'flex' : 'none', justifyContent: 'space-between', paddingTop: 1 }}>
+      <Box
+        sx={{
+          display: isButtonShown ? 'flex' : 'none',
+          justifyContent: 'space-between',
+          paddingTop: 1,
+        }}
+      >
         <PrevButton onClick={handleBack} />
         <NextButton onClick={handleNext} />
       </Box>

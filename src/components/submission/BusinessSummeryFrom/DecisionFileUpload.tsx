@@ -1,7 +1,7 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
 import FileUploadInputBox from '@components/common/form/FileUploadInputBox'
-import InputBox from '@components/common/form/InputBox'
+import InputTextBox from '@components/common/form/InputTextBox'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
 import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
@@ -13,7 +13,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form'
 import { IoAddCircle } from 'react-icons/io5'
 
 import { useInsertDecisionFileUpload } from '@/api/implementer-application-api/implementer-application-api'
-import type { InsertDecisionFileUploadParams } from '@/model'
+import type { ImplementerUploadFileRequest } from '@/model'
 import { useShowAlertMessage } from '@/store/message'
 
 interface DecisionFileUploadProps {
@@ -22,10 +22,14 @@ interface DecisionFileUploadProps {
   isButtonShown: boolean
 }
 
+interface DecisionFileUploadParam {
+  implementerUploadFileRequestList: ImplementerUploadFileRequest[]
+}
+
 const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, handleBack, isButtonShown }) => {
   const [defaultAttachmentsState, setDefaultAttachments] = useState(defaultAttachments)
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, control, register } = useForm<InsertDecisionFileUploadParams>({
+  const { handleSubmit, control, register } = useForm<DecisionFileUploadParam>({
     defaultValues: {
       implementerUploadFileRequestList: defaultAttachments.map(attachment => {
         return {
@@ -64,7 +68,7 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
   })
 
   const isTest = true
-  const onSubmit: SubmitHandler<InsertDecisionFileUploadParams> = async data => {
+  const onSubmit: SubmitHandler<DecisionFileUploadParam> = async data => {
     console.log('=======[data start]==========')
     console.log(data)
     handleNext()
@@ -74,7 +78,7 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
     // 저장
     mutate({
       judgSeq: 123,
-      params: data,
+      data: data.implementerUploadFileRequestList,
     })
     // 다음 페이지 이동
     handleNext()
@@ -107,7 +111,7 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
               <TableRow>
                 <TableBaseBodyItem align={'left'}>{item.name !== undefined ? `${index + 1}. ${item.name}` : ''}</TableBaseBodyItem>
                 <TableBaseBodyItem>
-                  <InputBox id={`implementerUploadFileRequestList.${index}.description`} register={register} type={'text'} />
+                  <InputTextBox id={`implementerUploadFileRequestList.${index}.description`} register={register} type={'text'} />
                 </TableBaseBodyItem>
                 <TableBaseBodyItem>
                   <Box display={'flex'}>
@@ -136,14 +140,14 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
                 <TableRow key={subIndex}>
                   <TableBaseBodyItem></TableBaseBodyItem>
                   <TableBaseBodyItem>
-                    <InputBox
+                    <InputTextBox
                       id={`implementerUploadFileRequestList.${index}.subImplementerUploadFile.${subIndex}.order`}
                       register={register}
                       value={subIndex + 1}
                       type={'hidden'}
                       hidden
                     />
-                    <InputBox
+                    <InputTextBox
                       id={`implementerUploadFileRequestList.${index}.subImplementerUploadFile.${subIndex}.description`}
                       placeholder={subItem?.description}
                       register={register}
@@ -164,7 +168,13 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
           ))}
         </TableBaseBody>
       </TableBaseContainer>
-      <Box sx={{ display: isButtonShown ? 'flex' : 'none', justifyContent: 'space-between', paddingTop: 1 }}>
+      <Box
+        sx={{
+          display: isButtonShown ? 'flex' : 'none',
+          justifyContent: 'space-between',
+          paddingTop: 1,
+        }}
+      >
         <PrevButton onClick={handleBack} />
         <NextButton type={'submit'} />
       </Box>

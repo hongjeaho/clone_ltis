@@ -1,5 +1,5 @@
 import DatePickerRangeBox from '@components/common/form/DatePickerRangeBox'
-import InputBox from '@components/common/form/InputBox'
+import InputTextBox from '@components/common/form/InputTextBox'
 import styled from '@emotion/styled/macro'
 import { Button, Checkbox, TableRow } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -7,14 +7,14 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
-import { type GetImplementerApplicationParams } from '@/model'
+import { type SubmissionListParams } from '@/model'
 import { DecisionStepList } from '@/store'
 
 import TableLabelContainer from '../common/layout/table/label/TableLabelContainer'
 import TableLabelItem from '../common/layout/table/label/TableLabelItem'
 
 interface SearchFilterProps {
-  onSubmit: SubmitHandler<GetImplementerApplicationParams>
+  onSubmit: SubmitHandler<SubmissionListParams>
 }
 
 const Form = styled.form`
@@ -22,7 +22,7 @@ const Form = styled.form`
 `
 
 const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
-  const { handleSubmit, register, control } = useForm<GetImplementerApplicationParams>({
+  const { handleSubmit, register, control } = useForm<SubmissionListParams>({
     defaultValues: {
       keyword: undefined,
       startRecepDt: undefined,
@@ -39,7 +39,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
         <TableLabelContainer columnSize={4}>
           <TableRow>
             <TableLabelItem label={'검색 키워드'} colSpan={3}>
-              <InputBox id="keyword" placeholder="사건번호 혹은 사업명" type="text" register={register} />
+              <InputTextBox id="keyword" placeholder="사건번호 혹은 사업명" type="text" register={register} />
             </TableLabelItem>
           </TableRow>
           <TableRow>
@@ -49,10 +49,10 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
           </TableRow>
           <TableRow>
             <TableLabelItem label={'소재지'}>
-              <InputBox id="address" type="text" register={register} />
+              <InputTextBox id="address" type="text" register={register} />
             </TableLabelItem>
             <TableLabelItem label={'시행자명'}>
-              <InputBox id="implementerNm" type="text" register={register} />
+              <InputTextBox id="implementerNm" type="text" register={register} />
             </TableLabelItem>
           </TableRow>
           <TableRow>

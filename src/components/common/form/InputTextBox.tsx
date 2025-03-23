@@ -21,7 +21,7 @@ const Base = styled.div<{ hidden: boolean }>`
   display: ${({ hidden }) => (hidden ? 'none' : 'block')};
 `
 
-const InputBox: React.FC<InputBoxProps<any>> = ({
+const InputTextBox: React.FC<InputBoxProps<any>> = ({
   id,
   label,
   type = 'text',
@@ -58,4 +58,4 @@ const InputBox: React.FC<InputBoxProps<any>> = ({
   )
 }
 
-export default InputBox
+export default InputTextBox

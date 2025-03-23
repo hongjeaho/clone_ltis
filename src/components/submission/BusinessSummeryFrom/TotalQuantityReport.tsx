@@ -1,6 +1,6 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
-import InputBox from '@components/common/form/InputBox'
+import InputTextBox from '@components/common/form/InputTextBox'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
 import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
@@ -11,7 +11,7 @@ import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 import { useInsertDecisionTotalQuantityReport } from '@/api/implementer-application-api/implementer-application-api'
-import { type InsertDecisionTotalQuantityReportParams } from '@/model/insertDecisionTotalQuantityReportParams'
+import { type DecisionTotalQuantityReportEntity } from '@/model'
 import { useShowAlertMessage } from '@/store/message'
 
 interface TotalQuantityReportProps {
@@ -22,7 +22,7 @@ interface TotalQuantityReportProps {
 
 const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({ handleNext, handleBack, isButtonShown }) => {
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, register } = useForm<InsertDecisionTotalQuantityReportParams>()
+  const { handleSubmit, register } = useForm<DecisionTotalQuantityReportEntity>()
 
   const { mutate } = useInsertDecisionTotalQuantityReport({
     mutation: {
@@ -32,12 +32,12 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({ handleNext, h
       },
     },
   })
-  const onSubmit: SubmitHandler<InsertDecisionTotalQuantityReportParams> = async data => {
+  const onSubmit: SubmitHandler<DecisionTotalQuantityReportEntity> = async data => {
     console.log(data)
 
     mutate({
       judgSeq: 123,
-      params: data,
+      data,
     })
   }
 
@@ -62,14 +62,20 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({ handleNext, h
             <TableRow key={index}>
               <TableBaseBodyItem key={index}>{row.label}</TableBaseBodyItem>
               {row.ids.map((id, subIndex) => (
-                <TableBaseBodyItem key={subIndex}>{id !== '' ? <InputBox id={id} register={register} type={'text'} /> : ''}</TableBaseBodyItem>
+                <TableBaseBodyItem key={subIndex}>{id !== '' ? <InputTextBox id={id} register={register} type={'text'} /> : ''}</TableBaseBodyItem>
               ))}
             </TableRow>
           ))}
         </TableBaseBody>
       </TableBaseContainer>
 
-      <Box sx={{ display: isButtonShown ? 'flex' : 'none', justifyContent: 'space-between', paddingTop: 1 }}>
+      <Box
+        sx={{
+          display: isButtonShown ? 'flex' : 'none',
+          justifyContent: 'space-between',
+          paddingTop: 1,
+        }}
+      >
         <PrevButton onClick={handleBack} />
         <NextButton onClick={handleNext} />
       </Box>
