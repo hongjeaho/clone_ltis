@@ -8,38 +8,38 @@ import { Box, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
-import { useDecisionInfo, useInsertDecision } from '@/api/implementer-application-api/implementer-application-api'
-import { type DecisionEntity } from '@/model'
+import { useBusinessInfo, useInsertBusinessInfo } from '@/api/case-application-api/case-application-api'
+import { type BusinessInfoEntity } from '@/model'
 import { useShowAlertMessage } from '@/store/message'
 
-interface DecisionProps {
+interface BusinessInfoProps {
   handleNext: () => void
   isButtonShown: boolean
   judgSeq: number
 }
 
-const Decision: React.FC<DecisionProps> = ({ judgSeq, handleNext, isButtonShown }) => {
+const BusinessInfo: React.FC<BusinessInfoProps> = ({ judgSeq, handleNext, isButtonShown }) => {
   // 사업 개요 조회
-  const { data, isSuccess } = useDecisionInfo(judgSeq)
+  const { data, isSuccess } = useBusinessInfo(judgSeq)
   if (isSuccess) {
-    return <DecisionForm defaultData={data} handleNext={handleNext} isButtonShown={isButtonShown} judgSeq={judgSeq} />
+    return <BusinessInfoForm defaultData={data} handleNext={handleNext} isButtonShown={isButtonShown} judgSeq={judgSeq} />
   }
 
   return <SkeletonLoading />
 }
 
-interface DecisionFromProps {
+interface BusinessInfoFromProps {
   handleNext: () => void
   isButtonShown: boolean
   judgSeq: number
-  defaultData?: DecisionEntity
+  defaultData?: BusinessInfoEntity
 }
 
-const DecisionForm: React.FC<DecisionFromProps> = ({ defaultData, judgSeq, handleNext, isButtonShown }) => {
+const BusinessInfoForm: React.FC<BusinessInfoFromProps> = ({ defaultData, judgSeq, handleNext, isButtonShown }) => {
   const showAlertMessage = useShowAlertMessage()
 
   // 사업 개요 저장 API 설정
-  const { mutate } = useInsertDecision({
+  const { mutate } = useInsertBusinessInfo({
     mutation: {
       onSuccess: data => {
         handleNext()
@@ -55,12 +55,12 @@ const DecisionForm: React.FC<DecisionFromProps> = ({ defaultData, judgSeq, handl
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<DecisionEntity>({
+  } = useForm<BusinessInfoEntity>({
     defaultValues: defaultData,
   })
 
   // 사업 개용 저장 submit
-  const onSubmit: SubmitHandler<DecisionEntity> = async data => {
+  const onSubmit: SubmitHandler<BusinessInfoEntity> = async data => {
     console.log(data)
 
     mutate({
@@ -103,11 +103,11 @@ const DecisionForm: React.FC<DecisionFromProps> = ({ defaultData, judgSeq, handl
         <TableRow>
           <TableLabelItem label={'재결신청 사유'}>
             <InputTextBox
-              id="decisionReason"
+              id="requestReason"
               placeholder=""
               type="text"
               register={register}
-              error={errors?.decisionReason}
+              error={errors?.requestReason}
               rules={{
                 required: '재결신청 사유를 입력해 주세요.',
               }}
@@ -140,4 +140,4 @@ const DecisionForm: React.FC<DecisionFromProps> = ({ defaultData, judgSeq, handl
   )
 }
 
-export default Decision
+export default BusinessInfo

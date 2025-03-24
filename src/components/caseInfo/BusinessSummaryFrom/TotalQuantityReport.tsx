@@ -10,8 +10,7 @@ import { Box, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
-import { useInsertDecisionTotalQuantityReport } from '@/api/implementer-application-api/implementer-application-api'
-import { type DecisionTotalQuantityReportEntity } from '@/model'
+import { type QuantityReportEntity } from '@/model/quantityReportEntity'
 import { useShowAlertMessage } from '@/store/message'
 
 interface TotalQuantityReportProps {
@@ -22,9 +21,9 @@ interface TotalQuantityReportProps {
 
 const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({ handleNext, handleBack, isButtonShown }) => {
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, register } = useForm<DecisionTotalQuantityReportEntity>()
+  const { handleSubmit, register } = useForm<QuantityReportEntity>()
 
-  const { mutate } = useInsertDecisionTotalQuantityReport({
+  const { mutate } = useInsertQuantityReport({
     mutation: {
       onSuccess: data => {},
       onError: error => {
@@ -32,7 +31,7 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({ handleNext, h
       },
     },
   })
-  const onSubmit: SubmitHandler<DecisionTotalQuantityReportEntity> = async data => {
+  const onSubmit: SubmitHandler<QuantityReportEntity> = async data => {
     console.log(data)
 
     mutate({
@@ -143,3 +142,6 @@ const totalQuantityReportLabels = [
 ]
 
 export default TotalQuantityReport
+function useInsertQuantityReport(arg0: { mutation: { onSuccess: (data: any) => void; onError: (error: any) => void } }): { mutate: any } {
+  throw new Error('Function not implemented.')
+}

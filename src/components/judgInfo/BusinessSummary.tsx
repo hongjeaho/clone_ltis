@@ -3,11 +3,11 @@ import TableLabelItem from '@components/common/layout/table/label/TableLabelItem
 import { TableRow } from '@mui/material'
 import React from 'react'
 
-interface BusinessInfoProps {
+interface BusinessSummaryProps {
   judgSeq: number
 }
 
-const BusinessInfo: React.FC<BusinessInfoProps> = () => {
+const BusinessSummary: React.FC<BusinessSummaryProps> = () => {
   return (
     <TableLabelContainer title={'사업 정보'} subTitle={'LTIS 업데이트 일 : 2025-02-27 '}>
       <TableRow>
@@ -34,4 +34,4 @@ const BusinessInfo: React.FC<BusinessInfoProps> = () => {
   )
 }
 
-export default BusinessInfo
+export default BusinessSummary

@@ -11,8 +11,8 @@ import { Box, Button, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
-import { useInsertDecisionCompensationAgreement } from '@/api/implementer-application-api/implementer-application-api'
-import { type DecisionCompensationAgreementEntity } from '@/model'
+import { useInsertAgreementDate } from '@/api/case-application-api/case-application-api'
+import { type AgreementDateEntity } from '@/model/agreementDateEntity'
 import { useShowAlertMessage } from '@/store/message'
 
 interface CompensationAgreementProps {
@@ -22,7 +22,7 @@ interface CompensationAgreementProps {
 }
 
 interface CompensationAgreementParam {
-  decisionCompensationAgreementList: DecisionCompensationAgreementEntity[]
+  AgreementDateList: AgreementDateEntity[]
 }
 
 const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNext, handleBack, isButtonShown }) => {
@@ -31,10 +31,10 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'decisionCompensationAgreementList',
+    name: 'AgreementDateList',
   })
 
-  const { mutate } = useInsertDecisionCompensationAgreement({
+  const { mutate } = useInsertAgreementDate({
     mutation: {
       onSuccess: data => {},
       onError: error => {
@@ -46,7 +46,7 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
   const onSubmit: SubmitHandler<CompensationAgreementParam> = async data => {
     mutate({
       judgSeq: 123,
-      data: data.decisionCompensationAgreementList,
+      data: data.AgreementDateList,
     })
   }
 
@@ -79,10 +79,10 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
           {fields.map((field, index) => (
             <TableRow key={index}>
               <TableBaseBodyItem>
-                <LocalDatePicker control={control} id={`decisionCompensationAgreementList.${index}.title`} />
+                <LocalDatePicker control={control} id={`AgreementDateList.${index}.title`} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
-                <InputTextBox id={`decisionCompensationAgreementList.${index}.content`} register={register} type={'text'} />
+                <InputTextBox id={`AgreementDateList.${index}.content`} register={register} type={'text'} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
                 <Button

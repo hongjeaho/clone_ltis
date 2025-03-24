@@ -1,14 +1,16 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
-import BusinessRecognition from '@components/submission/BusinessSummeryFrom/BusinessRecognition'
-import CompensationAgreement from '@components/submission/BusinessSummeryFrom/CompensationAgreement'
-import Decision from '@components/submission/BusinessSummeryFrom/Decision'
-import DecisionFileUpload from '@components/submission/BusinessSummeryFrom/DecisionFileUpload'
-import TotalQuantityReport from '@components/submission/BusinessSummeryFrom/TotalQuantityReport'
 import { Box, Step, StepLabel } from '@mui/material'
 import Stepper from '@mui/material/Stepper/Stepper'
 import React, { type ReactNode, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
+import BusinessRecognition from '@/components/caseInfo/BusinessSummaryFrom/BusinessRecognition'
+import CaseFileUpload from '@/components/caseInfo/BusinessSummaryFrom/CaseFileUpload'
+import CompensationAgreement from '@/components/caseInfo/BusinessSummaryFrom/CompensationAgreement'
+import TotalQuantityReport from '@/components/caseInfo/BusinessSummaryFrom/TotalQuantityReport'
+
+import BusinessInfo from './BusinessInfo'
 
 interface Params {
   judgSeq: number
@@ -31,23 +33,23 @@ const BusinessSummeryFrom: React.FC = () => {
     return [
       {
         label: '사업 개요',
-        component: <Decision handleNext={handleNext} isButtonShown={activeStep === 0} judgSeq={judgSeq} />,
+        component: <BusinessInfo handleNext={handleNext} isButtonShown={activeStep === 0} judgSeq={judgSeq} />,
       },
       {
-        label: `총물량조서`,
+        label: `총 물량조서`,
         component: <TotalQuantityReport handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 1} />,
       },
       {
-        label: '도시계획',
+        label: '사업인정관계',
         component: <BusinessRecognition handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 2} />,
       },
       {
-        label: '협의 내용',
+        label: '협의 날짜',
         component: <CompensationAgreement handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 3} />,
       },
       {
-        label: '첨부파일',
-        component: <DecisionFileUpload handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 4} />,
+        label: '첨부 파일',
+        component: <CaseFileUpload handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 4} />,
       },
       { label: '내용 확인', component: <></> },
     ]

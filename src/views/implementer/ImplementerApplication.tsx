@@ -4,16 +4,15 @@ import React, { useCallback, useState } from 'react'
 import { type SubmitHandler } from 'react-hook-form'
 import { FaRegFilePdf } from 'react-icons/fa6'
 
-import { useSubmissionList } from '@/api/implementer-application-api/implementer-application-api'
 import Title from '@/components/base/title/Title'
 import SearchBox from '@/components/implementer/SearchFilter'
-import { type SubmissionListParams } from '@/model'
+import { type CaseInfoListParams } from '@/model/caseInfoListParams'
 
 const ImplementerApplication: React.FC = () => {
-  const [searchParam, setSearchParam] = useState<SubmissionListParams>({})
+  const [searchParam, setSearchParam] = useState<CaseInfoListParams>({})
 
   // SearchForm 제출 시 호출되는 함수
-  const handleSearchSubmit: SubmitHandler<SubmissionListParams> = async data => {
+  const handleSearchSubmit: SubmitHandler<CaseInfoListParams> = async data => {
     setSearchParam(params => ({ ...params, ...data, pag: 0, pageSize: 10 }))
   }
 
@@ -27,7 +26,7 @@ const ImplementerApplication: React.FC = () => {
     setSearchParam(currentParam => ({ ...currentParam, pageSize, page: 0 }))
   }, [])
 
-  const { data, isLoading } = useSubmissionList({ ...searchParam })
+  const { data, isLoading } = useCaseInfo({ ...searchParam })
 
   return (
     <>
@@ -107,3 +106,15 @@ const ImplementerApplication: React.FC = () => {
 }
 
 export default ImplementerApplication
+function useCaseInfo(arg0: {
+  keyword?: string
+  startRecepDt?: string
+  endRecepDt?: string
+  address?: string
+  implementerNm?: string
+  decisionStep?: string[]
+  page?: number
+  pageSize?: number
+}): { data: any; isLoading: any } {
+  throw new Error('Function not implemented.')
+}

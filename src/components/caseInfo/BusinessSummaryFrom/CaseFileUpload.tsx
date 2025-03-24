@@ -12,24 +12,24 @@ import React, { Fragment, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { IoAddCircle } from 'react-icons/io5'
 
-import { useInsertDecisionFileUpload } from '@/api/implementer-application-api/implementer-application-api'
-import type { ImplementerUploadFileRequest } from '@/model'
+import { useInsertCaseFileUpload } from '@/api/case-application-api/case-application-api'
+import { type CaseInfoUploadFileRequest } from '@/model/caseInfoUploadFileRequest'
 import { useShowAlertMessage } from '@/store/message'
 
-interface DecisionFileUploadProps {
+interface CaseFileUploadProps {
   handleNext: () => void
   handleBack: () => void
   isButtonShown: boolean
 }
 
-interface DecisionFileUploadParam {
-  implementerUploadFileRequestList: ImplementerUploadFileRequest[]
+interface CaseFileUploadParam {
+  implementerUploadFileRequestList: CaseInfoUploadFileRequest[]
 }
 
-const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, handleBack, isButtonShown }) => {
+const CaseFileUpload: React.FC<CaseFileUploadProps> = ({ handleNext, handleBack, isButtonShown }) => {
   const [defaultAttachmentsState, setDefaultAttachments] = useState(defaultAttachments)
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, control, register } = useForm<DecisionFileUploadParam>({
+  const { handleSubmit, control, register } = useForm<CaseFileUploadParam>({
     defaultValues: {
       implementerUploadFileRequestList: defaultAttachments.map(attachment => {
         return {
@@ -58,7 +58,7 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
     )
   }
 
-  const { mutate } = useInsertDecisionFileUpload({
+  const { mutate } = useInsertCaseFileUpload({
     mutation: {
       onSuccess: data => {},
       onError: error => {
@@ -68,7 +68,7 @@ const DecisionFileUpload: React.FC<DecisionFileUploadProps> = ({ handleNext, han
   })
 
   const isTest = true
-  const onSubmit: SubmitHandler<DecisionFileUploadParam> = async data => {
+  const onSubmit: SubmitHandler<CaseFileUploadParam> = async data => {
     console.log('=======[data start]==========')
     console.log(data)
     handleNext()
@@ -329,4 +329,4 @@ const defaultAttachments: Attachment[] = [
     sub: [],
   },
 ]
-export default DecisionFileUpload
+export default CaseFileUpload
