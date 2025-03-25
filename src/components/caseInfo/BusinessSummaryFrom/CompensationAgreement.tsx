@@ -11,7 +11,7 @@ import { Box, Button, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
-import { useInsertAgreementDate } from '@/api/case-application-api/case-application-api'
+import { useInsertOrUpdateAgreementDate } from '@/api/case-application-api/case-application-api'
 import { type AgreementDateEntity } from '@/model/agreementDateEntity'
 import { useShowAlertMessage } from '@/store/message'
 
@@ -25,7 +25,11 @@ interface CompensationAgreementParam {
   AgreementDateList: AgreementDateEntity[]
 }
 
-const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNext, handleBack, isButtonShown }) => {
+const CompensationAgreement: React.FC<CompensationAgreementProps> = ({
+  handleNext,
+  handleBack,
+  isButtonShown,
+}) => {
   const showAlertMessage = useShowAlertMessage()
   const { handleSubmit, control, register } = useForm<CompensationAgreementParam>()
 
@@ -34,7 +38,7 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
     name: 'AgreementDateList',
   })
 
-  const { mutate } = useInsertAgreementDate({
+  const { mutate } = useInsertOrUpdateAgreementDate({
     mutation: {
       onSuccess: data => {},
       onError: error => {
@@ -52,8 +56,8 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
 
   const handleAppend = () => {
     append({
-      agreementDate: '',
-      agreementDetail: '',
+      agreedDate: '',
+      agreedDesc: '',
     })
   }
 
@@ -82,7 +86,11 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({ handleNex
                 <LocalDatePicker control={control} id={`AgreementDateList.${index}.title`} />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
-                <InputTextBox id={`AgreementDateList.${index}.content`} register={register} type={'text'} />
+                <InputTextBox
+                  id={`AgreementDateList.${index}.content`}
+                  register={register}
+                  type={'text'}
+                />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
                 <Button

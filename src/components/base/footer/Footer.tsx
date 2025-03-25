@@ -35,7 +35,11 @@ const Footter: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.scourt.go.kr/scourt/index.html" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://www.scourt.go.kr/scourt/index.html"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     대법원
                   </a>
                 </li>
@@ -50,7 +54,11 @@ const Footter: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://molit.kapanet.or.kr/system/main.do" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://molit.kapanet.or.kr/system/main.do"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     재결감정평가서정보센터
                   </a>
                 </li>
@@ -76,10 +84,16 @@ const Footter: React.FC = () => {
 
             <ul>
               <li>
-                <span> 서울특별시 중구 서소문로 124 (서소문동) 씨티스퀘어빌딩 11층 토지관리과 </span>
+                <span>
+                  {' '}
+                  서울특별시 중구 서소문로 124 (서소문동) 씨티스퀘어빌딩 11층 토지관리과{' '}
+                </span>
               </li>
               <li>
-                <span> HELP DESK : 02-3465-9975 [월~금 10:00~17:00, 점심시간(12:00~13:00) 및 공휴일 제외]</span>
+                <span>
+                  {' '}
+                  HELP DESK : 02-3465-9975 [월~금 10:00~17:00, 점심시간(12:00~13:00) 및 공휴일 제외]
+                </span>
               </li>
               <li>
                 <span> Email : helpdesk@sltis.info</span>

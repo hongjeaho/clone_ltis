@@ -26,7 +26,13 @@ const AlertMessage: React.FC = () => {
   }, [alertMessage])
 
   return (
-    <Dialog open={isOpen} keepMounted onClose={onClose} maxWidth={'sm'} aria-describedby="alert-dialog-slide-description">
+    <Dialog
+      open={isOpen}
+      keepMounted
+      onClose={onClose}
+      maxWidth={'sm'}
+      aria-describedby="alert-dialog-slide-description"
+    >
       <DialogTitle>
         <CiWarning />
       </DialogTitle>

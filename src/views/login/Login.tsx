@@ -81,7 +81,13 @@ const Login: React.FC = () => {
           </div>
           <div>
             <div>
-              <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" className={styles.form}>
+              <Box
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}
+                noValidate
+                autoComplete="off"
+                className={styles.form}
+              >
                 <div>
                   <InputTextBox
                     id="id"
@@ -114,14 +120,26 @@ const Login: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <Button type="submit" variant="contained" color="primary" size="large" fullWidth sx={{ height: '100%' }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    fullWidth
+                    sx={{ height: '100%' }}
+                  >
                     로그인
                   </Button>
                 </div>
               </Box>
             </div>
 
-            <Box display={'pixed'} justifyContent={'center'} alignItems={'center'} sx={{ backgroundColor: '#fff' }}>
+            <Box
+              display={'pixed'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              sx={{ backgroundColor: '#fff' }}
+            >
               <Button>회원가입</Button>
             </Box>
           </div>

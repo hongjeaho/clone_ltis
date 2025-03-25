@@ -1,7 +1,12 @@
 import styled from '@emotion/styled/macro'
 import Box from '@mui/material/Box/Box'
 import Pagination from '@mui/material/Pagination'
-import { gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector } from '@mui/x-data-grid'
+import {
+  gridPageCountSelector,
+  gridPageSelector,
+  useGridApiContext,
+  useGridSelector,
+} from '@mui/x-data-grid'
 
 const MuiDataGridPagination: React.FC = (props: any) => {
   const apiRef = useGridApiContext()
@@ -26,7 +31,13 @@ const MuiDataGridPagination: React.FC = (props: any) => {
 
   return (
     <PaginationBox>
-      <Pagination count={pageCount} page={page + 1} onChange={onChange} showFirstButton showLastButton />
+      <Pagination
+        count={pageCount}
+        page={page + 1}
+        onChange={onChange}
+        showFirstButton
+        showLastButton
+      />
     </PaginationBox>
   )
 }

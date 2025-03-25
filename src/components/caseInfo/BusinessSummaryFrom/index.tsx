@@ -33,23 +33,54 @@ const BusinessSummeryFrom: React.FC = () => {
     return [
       {
         label: '사업 개요',
-        component: <BusinessInfo handleNext={handleNext} isButtonShown={activeStep === 0} judgSeq={judgSeq} />,
+        component: (
+          <BusinessInfo
+            judgSeq={judgSeq}
+            handleNext={handleNext}
+            isButtonShown={activeStep === 0}
+          />
+        ),
       },
       {
         label: `총 물량조서`,
-        component: <TotalQuantityReport handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 1} />,
+        component: (
+          <TotalQuantityReport
+            judgSeq={judgSeq}
+            handleNext={handleNext}
+            handleBack={handleBack}
+            isButtonShown={activeStep === 1}
+          />
+        ),
       },
       {
         label: '사업인정관계',
-        component: <BusinessRecognition handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 2} />,
+        component: (
+          <BusinessRecognition
+            handleNext={handleNext}
+            handleBack={handleBack}
+            isButtonShown={activeStep === 2}
+          />
+        ),
       },
       {
         label: '협의 날짜',
-        component: <CompensationAgreement handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 3} />,
+        component: (
+          <CompensationAgreement
+            handleNext={handleNext}
+            handleBack={handleBack}
+            isButtonShown={activeStep === 3}
+          />
+        ),
       },
       {
         label: '첨부 파일',
-        component: <CaseFileUpload handleNext={handleNext} handleBack={handleBack} isButtonShown={activeStep === 4} />,
+        component: (
+          <CaseFileUpload
+            handleNext={handleNext}
+            handleBack={handleBack}
+            isButtonShown={activeStep === 4}
+          />
+        ),
       },
       { label: '내용 확인', component: <></> },
     ]
@@ -72,7 +103,12 @@ const BusinessSummeryFrom: React.FC = () => {
         })}
       </Stepper>
       {steps.map((step, index) => (
-        <Box key={index} sx={{ display: activeStep === index || activeStep === steps.length - 1 ? 'block' : 'none' }}>
+        <Box
+          key={index}
+          sx={{
+            display: activeStep === index || activeStep === steps.length - 1 ? 'block' : 'none',
+          }}
+        >
           {step.component}
         </Box>
       ))}

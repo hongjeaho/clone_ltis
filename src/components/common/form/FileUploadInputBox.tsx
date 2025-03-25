@@ -31,7 +31,13 @@ const FileUploadInputBox: React.FC<FileUploadInputBoxProps> = ({ id, control }) 
               inputProps={{ 'aria-label': '파일을 업로드 해주세요' }}
               disabled
             />
-            <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<FaFileUpload />}>
+            <Button
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<FaFileUpload />}
+            >
               업로드
               <VisuallyHiddenInput
                 type="file"

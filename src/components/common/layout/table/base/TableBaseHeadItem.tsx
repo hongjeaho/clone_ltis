@@ -8,7 +8,13 @@ interface TableItemProps extends PropsWithChildren {
   rowSpan?: number
 }
 
-const TableLabelItem: React.FC<TableItemProps> = ({ width = 200, colSpan = 1, rowSpan = 1, label, children }) => {
+const TableLabelItem: React.FC<TableItemProps> = ({
+  width = 200,
+  colSpan = 1,
+  rowSpan = 1,
+  label,
+  children,
+}) => {
   return (
     <>
       <TableCell

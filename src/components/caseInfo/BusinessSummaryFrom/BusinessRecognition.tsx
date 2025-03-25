@@ -10,8 +10,8 @@ import { Box, Button, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
-import { useInsertBusinessRecognition } from '@/api/case-application-api/case-application-api'
-import { type BusinessRecognitionEntity } from '@/model'
+import { useInsertOrUpdateBusinessRecognition } from '@/api/case-application-api/case-application-api'
+import { type BusinessRecognitionEntity } from '@/model/businessRecognitionEntity'
 import { useShowAlertMessage } from '@/store/message'
 
 interface BusinessRecognitionProps {
@@ -24,7 +24,11 @@ interface BusinessRecognitionParam {
   businessRecognitionList: BusinessRecognitionEntity[]
 }
 
-const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, handleBack, isButtonShown }) => {
+const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({
+  handleNext,
+  handleBack,
+  isButtonShown,
+}) => {
   const showAlertMessage = useShowAlertMessage()
   const { handleSubmit, control, register } = useForm<BusinessRecognitionParam>()
 
@@ -33,7 +37,7 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, h
     name: 'businessRecognitionList',
   })
 
-  const { mutate } = useInsertBusinessRecognition({
+  const { mutate } = useInsertOrUpdateBusinessRecognition({
     mutation: {
       onSuccess: data => {},
       onError: error => {
@@ -78,10 +82,18 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({ handleNext, h
           {fields.map((field, index) => (
             <TableRow key={index}>
               <TableBaseBodyItem>
-                <InputTextBox id={`businessRecognitionList.${index}.title`} register={register} type={'text'} />
+                <InputTextBox
+                  id={`businessRecognitionList.${index}.title`}
+                  register={register}
+                  type={'text'}
+                />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
-                <InputTextBox id={`businessRecognitionList.${index}.content`} register={register} type={'text'} />
+                <InputTextBox
+                  id={`businessRecognitionList.${index}.content`}
+                  register={register}
+                  type={'text'}
+                />
               </TableBaseBodyItem>
               <TableBaseBodyItem>
                 <Button

@@ -1,6 +1,15 @@
 import TableTitle from '@components/common/layout/TableTitle'
 import styled from '@emotion/styled/macro'
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import React, { type PropsWithChildren } from 'react'
 
 interface TableLayoutProps extends PropsWithChildren {
@@ -20,7 +29,12 @@ const TableSubTitle = styled.span`
   padding-top: 10px;
 `
 
-const TableLabelContainer: React.FC<TableLayoutProps> = ({ columnSize = 2, title, subTitle, children }) => {
+const TableLabelContainer: React.FC<TableLayoutProps> = ({
+  columnSize = 2,
+  title,
+  subTitle,
+  children,
+}) => {
   return (
     <Base>
       <Typography gutterBottom display={'flex'} justifyContent={'space-between'}>

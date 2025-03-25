@@ -31,11 +31,21 @@ const ImplementerDetail: React.FC = () => {
         </Box>
 
         <Stack justifyContent={'center'} spacing={2} direction={'row'} sx={{ paddingTop: 5 }}>
-          <Button size={'large'} variant={'outlined'} component={Link} to={'/implementer/application'}>
+          <Button
+            size={'large'}
+            variant={'outlined'}
+            component={Link}
+            to={'/implementer/application'}
+          >
             목록 보기
           </Button>
 
-          <Button size={'large'} variant={'contained'} component={Link} to={`/implementer/application/${judgSeq}/write`}>
+          <Button
+            size={'large'}
+            variant={'contained'}
+            component={Link}
+            to={`/implementer/application/${judgSeq}/write`}
+          >
             LTIS 입력정보 등록
           </Button>
         </Stack>

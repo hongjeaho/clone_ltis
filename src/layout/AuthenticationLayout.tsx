@@ -35,7 +35,9 @@ const AuthenticationLayout: React.FC = () => {
 
     const path = location.pathname.split('/')[1] ?? 'implementer'
     const authority: string[] = menuAuthority[`${path}`] ?? []
-    const roleCheck = userAuthority?.map(authority => authority.role)?.some(value => authority.includes(value)) ?? false
+    const roleCheck =
+      userAuthority?.map(authority => authority.role)?.some(value => authority.includes(value)) ??
+      false
 
     if (authority.length > 0 && !roleCheck) {
       message = '접근 권한이 없습니다.'

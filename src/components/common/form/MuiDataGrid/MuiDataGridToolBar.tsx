@@ -27,7 +27,11 @@ const MuiGridPaginationActionHidenBase = styled.div`
 const MuiGridToolBarRowSize: React.FC = () => {
   return (
     <MuiGridPaginationActionHidenBase>
-      <GridPagination labelRowsPerPage="페이지 행 수" labelDisplayedRows={() => ''} showLastButton={false} />
+      <GridPagination
+        labelRowsPerPage="페이지 행 수"
+        labelDisplayedRows={() => ''}
+        showLastButton={false}
+      />
     </MuiGridPaginationActionHidenBase>
   )
 }

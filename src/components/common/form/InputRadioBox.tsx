@@ -13,13 +13,27 @@ interface InputRadioBoxProps<T extends FieldValues> {
   direction?: 'column' | 'row'
 }
 
-const InputRadioBox: React.FC<InputRadioBoxProps<any>> = ({ id, error, rules, data, register, defaultValue, direction = 'row' }) => {
+const InputRadioBox: React.FC<InputRadioBoxProps<any>> = ({
+  id,
+  error,
+  rules,
+  data,
+  register,
+  defaultValue,
+  direction = 'row',
+}) => {
   console.log(error)
   return (
     <FormControl sx={{ m: 0 }} error={error !== undefined} variant="standard">
       <RadioGroup name={id} defaultValue={defaultValue} sx={{ flexDirection: direction }}>
         {data?.map(({ value, label }, index) => (
-          <FormControlLabel key={index} value={value} control={<Radio />} label={label} {...register(id, rules)} />
+          <FormControlLabel
+            key={index}
+            value={value}
+            control={<Radio />}
+            label={label}
+            {...register(id, rules)}
+          />
         ))}
       </RadioGroup>
       <FormHelperText>{error?.message}</FormHelperText>

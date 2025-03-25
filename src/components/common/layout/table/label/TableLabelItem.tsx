@@ -13,7 +13,13 @@ const TableItemValue = styled(TableCell)`
   border-bottom: solid 1px #9f9f9f;
 `
 
-const TableLabelItem: React.FC<TableItemProps> = ({ width = 170, colSpan = 1, label, value, children }) => {
+const TableLabelItem: React.FC<TableItemProps> = ({
+  width = 170,
+  colSpan = 1,
+  label,
+  value,
+  children,
+}) => {
   return (
     <>
       <TableCell

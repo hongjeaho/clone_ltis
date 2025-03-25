@@ -8,7 +8,10 @@ import { Box, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
-import { useBusinessInfo, useInsertBusinessInfo } from '@/api/case-application-api/case-application-api'
+import {
+  useBusinessInfo,
+  useInsertOrUpdateBusinessInfo,
+} from '@/api/case-application-api/case-application-api'
 import { type BusinessInfoEntity } from '@/model'
 import { useShowAlertMessage } from '@/store/message'
 
@@ -22,7 +25,14 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({ judgSeq, handleNext, isButt
   // 사업 개요 조회
   const { data, isSuccess } = useBusinessInfo(judgSeq)
   if (isSuccess) {
-    return <BusinessInfoForm defaultData={data} handleNext={handleNext} isButtonShown={isButtonShown} judgSeq={judgSeq} />
+    return (
+      <BusinessInfoForm
+        defaultData={data}
+        handleNext={handleNext}
+        isButtonShown={isButtonShown}
+        judgSeq={judgSeq}
+      />
+    )
   }
 
   return <SkeletonLoading />
@@ -35,11 +45,16 @@ interface BusinessInfoFromProps {
   defaultData?: BusinessInfoEntity
 }
 
-const BusinessInfoForm: React.FC<BusinessInfoFromProps> = ({ defaultData, judgSeq, handleNext, isButtonShown }) => {
+const BusinessInfoForm: React.FC<BusinessInfoFromProps> = ({
+  defaultData,
+  judgSeq,
+  handleNext,
+  isButtonShown,
+}) => {
   const showAlertMessage = useShowAlertMessage()
 
   // 사업 개요 저장 API 설정
-  const { mutate } = useInsertBusinessInfo({
+  const { mutate } = useInsertOrUpdateBusinessInfo({
     mutation: {
       onSuccess: data => {
         handleNext()

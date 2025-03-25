@@ -39,7 +39,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
         <TableLabelContainer columnSize={4}>
           <TableRow>
             <TableLabelItem label={'검색 키워드'} colSpan={3}>
-              <InputTextBox id="keyword" placeholder="사건번호 혹은 사업명" type="text" register={register} />
+              <InputTextBox
+                id="keyword"
+                placeholder="사건번호 혹은 사업명"
+                type="text"
+                register={register}
+              />
             </TableLabelItem>
           </TableRow>
           <TableRow>
@@ -68,7 +73,13 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
           </TableRow>
         </TableLabelContainer>
         <Box sx={{ paddingTop: 2 }} display={'flex'} justifyContent={'center'}>
-          <Button type="submit" variant="contained" color="primary" size="large" sx={{ width: '150px' }}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
+            sx={{ width: '150px' }}
+          >
             검색
           </Button>
         </Box>

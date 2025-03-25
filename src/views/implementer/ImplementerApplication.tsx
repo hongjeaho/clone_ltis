@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react'
 import { type SubmitHandler } from 'react-hook-form'
 import { FaRegFilePdf } from 'react-icons/fa6'
 
+import { useCaseInfoList } from '@/api/case-application-api/case-application-api'
 import Title from '@/components/base/title/Title'
 import SearchBox from '@/components/implementer/SearchFilter'
 import { type CaseInfoListParams } from '@/model/caseInfoListParams'
@@ -26,7 +27,7 @@ const ImplementerApplication: React.FC = () => {
     setSearchParam(currentParam => ({ ...currentParam, pageSize, page: 0 }))
   }, [])
 
-  const { data, isLoading } = useCaseInfo({ ...searchParam })
+  const { data, isLoading } = useCaseInfoList({ ...searchParam })
 
   return (
     <>
@@ -69,7 +70,7 @@ const ImplementerApplication: React.FC = () => {
                 width: 100,
               },
               {
-                field: 'statNm',
+                field: 'stateName',
                 headerName: '심의 진행상황',
                 type: 'string',
                 width: 110,
@@ -106,15 +107,3 @@ const ImplementerApplication: React.FC = () => {
 }
 
 export default ImplementerApplication
-function useCaseInfo(arg0: {
-  keyword?: string
-  startRecepDt?: string
-  endRecepDt?: string
-  address?: string
-  implementerNm?: string
-  decisionStep?: string[]
-  page?: number
-  pageSize?: number
-}): { data: any; isLoading: any } {
-  throw new Error('Function not implemented.')
-}

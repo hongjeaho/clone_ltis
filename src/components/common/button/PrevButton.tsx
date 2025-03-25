@@ -7,7 +7,12 @@ interface PrevButtonProps {
 
 const PrevButton: React.FC<PrevButtonProps> = ({ onClick }) => {
   return (
-    <Button size={'large'} variant="contained" onClick={onClick} sx={{ backgroundColor: '#6c757d' }}>
+    <Button
+      size={'large'}
+      variant="contained"
+      onClick={onClick}
+      sx={{ backgroundColor: '#6c757d' }}
+    >
       이전
     </Button>
   )

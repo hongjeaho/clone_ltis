@@ -26,7 +26,11 @@ interface CaseFileUploadParam {
   implementerUploadFileRequestList: CaseInfoUploadFileRequest[]
 }
 
-const CaseFileUpload: React.FC<CaseFileUploadProps> = ({ handleNext, handleBack, isButtonShown }) => {
+const CaseFileUpload: React.FC<CaseFileUploadProps> = ({
+  handleNext,
+  handleBack,
+  isButtonShown,
+}) => {
   const [defaultAttachmentsState, setDefaultAttachments] = useState(defaultAttachments)
   const showAlertMessage = useShowAlertMessage()
   const { handleSubmit, control, register } = useForm<CaseFileUploadParam>({
@@ -109,13 +113,22 @@ const CaseFileUpload: React.FC<CaseFileUploadProps> = ({ handleNext, handleBack,
           {defaultAttachmentsState.map((item, index) => (
             <Fragment key={index}>
               <TableRow>
-                <TableBaseBodyItem align={'left'}>{item.name !== undefined ? `${index + 1}. ${item.name}` : ''}</TableBaseBodyItem>
+                <TableBaseBodyItem align={'left'}>
+                  {item.name !== undefined ? `${index + 1}. ${item.name}` : ''}
+                </TableBaseBodyItem>
                 <TableBaseBodyItem>
-                  <InputTextBox id={`implementerUploadFileRequestList.${index}.description`} register={register} type={'text'} />
+                  <InputTextBox
+                    id={`implementerUploadFileRequestList.${index}.description`}
+                    register={register}
+                    type={'text'}
+                  />
                 </TableBaseBodyItem>
                 <TableBaseBodyItem>
                   <Box display={'flex'}>
-                    <FileUploadInputBox control={control} id={`implementerUploadFileRequestList.${index}.file`} />
+                    <FileUploadInputBox
+                      control={control}
+                      id={`implementerUploadFileRequestList.${index}.file`}
+                    />
                     {item.isAddButton && ( // 추가 버튼
                       <>
                         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
@@ -264,7 +277,12 @@ const defaultAttachments: Attachment[] = [
     isAddButton: false,
   },
   { description: '이행(보완)여부 자료', type: 'CD002010', required: false, isAddButton: false },
-  { description: '이행(보완)여부 확인 증빙 서류', type: 'CD002011', required: false, isAddButton: false },
+  {
+    description: '이행(보완)여부 확인 증빙 서류',
+    type: 'CD002011',
+    required: false,
+    isAddButton: false,
+  },
   {
     name: '소유자별서류',
     description: '사업시행자 제시액 조서',
@@ -272,7 +290,12 @@ const defaultAttachments: Attachment[] = [
     required: true,
     isAddButton: false,
   },
-  { description: '토지조서(조서별 세목고시 첨부)', type: 'CD002013', required: false, isAddButton: false },
+  {
+    description: '토지조서(조서별 세목고시 첨부)',
+    type: 'CD002013',
+    required: false,
+    isAddButton: false,
+  },
   { description: '물건조서', type: 'CD002014', required: false, isAddButton: false },
   { description: '협의 경위서', type: 'CD002015', required: true, isAddButton: false },
   { description: '토지 대장', type: 'CD002016', required: false, isAddButton: false },

@@ -24,7 +24,11 @@ const Base = styled.div<{ paddingTop: number }>`
   }
 `
 
-const TableBaseContainer: React.FC<TableBaseContainerProps> = ({ title, children, paddingTop = 50 }) => {
+const TableBaseContainer: React.FC<TableBaseContainerProps> = ({
+  title,
+  children,
+  paddingTop = 50,
+}) => {
   return (
     <Base paddingTop={paddingTop}>
       <Typography gutterBottom display={'flex'} justifyContent={'space-between'}>

@@ -1,8 +1,7 @@
-import styled from "@emotion/styled/macro";
-import React, {type PropsWithChildren} from "react"
+import styled from '@emotion/styled/macro'
+import React, { type PropsWithChildren } from 'react'
 
-interface TableTitleProps extends PropsWithChildren {
-}
+interface TableTitleProps extends PropsWithChildren {}
 
 const Title = styled.span`
   font-size: 22px;
@@ -10,9 +9,8 @@ const Title = styled.span`
   color: #274ba9;
 `
 
-const TableTitle: React.FC<TableTitleProps> = ({children}) => {
-  return (<Title>{children}</Title>)
+const TableTitle: React.FC<TableTitleProps> = ({ children }) => {
+  return <Title>{children}</Title>
 }
 
 export default TableTitle
-

@@ -6,12 +6,12 @@ import { type FieldError, type FieldValues, type UseFormRegister } from 'react-h
 interface InputBoxProps<T extends FieldValues> {
   id: string
   label?: string
-  type?: string
+  type?: 'text' | 'password' | 'hidden'
   disabled?: boolean
   register: UseFormRegister<T>
+  rules?: Record<string, any>
   error?: FieldError
   placeholder?: string
-  rules?: Record<string, any>
   fullWidth?: boolean
   value?: string | number
   hidden?: boolean
