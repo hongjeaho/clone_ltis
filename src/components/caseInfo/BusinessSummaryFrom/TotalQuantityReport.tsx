@@ -1,18 +1,25 @@
 import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
-import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
-import TableBaseHeadItem from '@components/common/layout/table/base/TableBaseHeadItem'
 import { Box, TableRow } from '@mui/material'
-import React, { useEffect } from 'react'
-import { type SubmitHandler, useForm, useWatch } from 'react-hook-form'
+import React from 'react'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 
-import { useInsertOrUpdateQuantityReport } from '@/api/case-application-api/case-application-api'
+import {
+  useInsertOrUpdateQuantityReport,
+  useQuantityReportByJudgSeq,
+} from '@/api/case-application-api/case-application-api'
 import InputNumberBox from '@/components/common/form/InputNumberBox'
+import TableBaseFooter from '@/components/common/layout/table/base/TableBaseFooter'
+import TableBaseItem from '@/components/common/layout/table/base/TableBaseItem'
+import TableBaseLabelItem from '@/components/common/layout/table/base/TableBaseLabelItem'
+import SkeletonLoading from '@/components/common/SkeletonLoading'
 import { type QuantityReportEntity } from '@/model/quantityReportEntity'
 import { useShowAlertMessage } from '@/store/message'
+
+import useSumCalcuate from './hook/useSumCalcuate'
 
 interface TotalQuantityReportProps {
   handleNext: () => void
@@ -27,8 +34,44 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({
   handleBack,
   isButtonShown,
 }) => {
+  const { data, isSuccess } = useQuantityReportByJudgSeq(judgSeq)
+
+  if (isSuccess) {
+    return (
+      <TotalQuantityReportForm
+        judgSeq={judgSeq}
+        handleNext={handleNext}
+        handleBack={handleBack}
+        defaultData={data}
+        isButtonShown={isButtonShown}
+      />
+    )
+  }
+
+  return <SkeletonLoading />
+}
+
+interface TotalQuantityReportFromProps {
+  handleNext: () => void
+  handleBack: () => void
+  isButtonShown: boolean
+  judgSeq: number
+  defaultData?: QuantityReportEntity
+}
+
+const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
+  defaultData,
+  judgSeq,
+  handleNext,
+  handleBack,
+  isButtonShown,
+}) => {
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, register, setValue, control } = useForm<QuantityReportEntity>()
+  const { handleSubmit, register, control } = useForm<QuantityReportEntity>({
+    defaultValues: defaultData,
+  })
+
+  const sumCalculate = useSumCalcuate({ control })
 
   const { mutate } = useInsertOrUpdateQuantityReport({
     mutation: {
@@ -40,84 +83,38 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({
   })
 
   const onSubmit: SubmitHandler<QuantityReportEntity> = async data => {
-    console.log(data)
+    const inputData = Object.fromEntries(
+      Object.entries(data)
+        .map(([key, value]) => [key, value === null ? '0' : value])
+        .map(([key, value]) => [key, value === '' ? '0' : value])
+        .map(([key, value]) => [key, parseFloat(value.replace(/,/g, ''))]),
+    )
 
     mutate({
-      judgSeq: 123,
-      data,
+      judgSeq,
+      data: {
+        ...inputData,
+        ...sumCalculate,
+      },
     })
+
+    handleNext()
   }
-
-  const landCnt = useWatch({
-    control,
-    name: 'landCnt',
-  })
-
-  const decisionLandCnt = useWatch({
-    control,
-    name: 'decisionLandCnt',
-  })
-
-  // // 필건
-  // const [objCnt, decisionObjCnt, goodwillCnt, decisionGoodwillCnt] = watch([
-  //   'objCnt',
-  //   'decisionObjCnt',
-  //   'goodwillCnt',
-  //   'decisionGoodwillCnt',
-  // ])
-
-  // // 면적
-  // const [landArea, decisionLandArea, etcArea, decisionEtcCnt] = watch([
-  //   'landArea',
-  //   'decisionLandArea',
-  //   'etcArea',
-  //   'decisionEtcCnt',
-  // ])
-
-  // // 금액
-  // const [landPrice, decisionLandPrice, objPrice, decisionObjPrice, etcPrice, decisionEtcPrice] =
-  //   watch([
-  //     'landPrice',
-  //     'decisionLandPrice',
-  //     'objPrice',
-  //     'decisionObjPrice',
-  //     'etcPrice',
-  //     'decisionEtcPrice',
-  //   ])
-
-  useEffect(() => {
-    setValue('totalLandCnt', Number(landCnt ?? 0) + Number(decisionLandCnt ?? 0))
-  }, [landCnt, decisionLandCnt])
-
-  // useEffect(() => {
-  //   // setValue('totalLandCnt', (landCnt ?? 0) + (decisionLandCnt ?? 0))
-  // }, [objCnt, decisionObjCnt, goodwillCnt, decisionGoodwillCnt])
-
-  // useEffect(() => {}, [landArea, decisionLandArea, etcArea, decisionEtcCnt])
-
-  // useEffect(() => {}, [
-  //   landPrice,
-  //   decisionLandPrice,
-  //   objPrice,
-  //   decisionObjPrice,
-  //   etcPrice,
-  //   decisionEtcPrice,
-  // ])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TableBaseContainer title={`총 물량조서`}>
         <TableBaseHead>
           <TableRow>
-            <TableBaseHeadItem rowSpan={2} label={'구분'} />
-            <TableBaseHeadItem colSpan={3} label={'총 보상대상'} />
-            <TableBaseHeadItem colSpan={3} label={'협의취득 등'} />
-            <TableBaseHeadItem colSpan={3} label={'재결신청'} />
+            <TableBaseLabelItem rowSpan={2} label={'구분'} />
+            <TableBaseLabelItem colSpan={3} label={'총 보상대상'} />
+            <TableBaseLabelItem colSpan={3} label={'협의취득 등'} />
+            <TableBaseLabelItem colSpan={3} label={'재결신청'} />
           </TableRow>
           <TableRow>
             {[...Array(3)].map((_, index) =>
               ['필,건', '면적(m²)', '금액(천 원)'].map((text, subIndex) => (
-                <TableBaseHeadItem key={`${index}-${subIndex}`} label={text} />
+                <TableBaseLabelItem key={`${index}-${subIndex}`} label={text} />
               )),
             )}
           </TableRow>
@@ -125,24 +122,55 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({
         <TableBaseBody>
           {totalQuantityReportLabels.map((row, index) => (
             <TableRow key={index}>
-              <TableBaseBodyItem key={index}>{row.label}</TableBaseBodyItem>
+              <TableBaseItem key={index}>{row.label}</TableBaseItem>
               {row.list.map((label, subIndex) => (
-                <TableBaseBodyItem key={subIndex}>
+                <TableBaseItem key={subIndex}>
                   {label.id !== '' ? (
                     <InputNumberBox
                       id={label.id}
                       disabled={label.disabled}
                       fixedDecimalScale={label.fixedDecimalScale}
                       register={register}
+                      value={sumCalculate[label.id] ?? ''}
                     />
                   ) : (
                     '-'
                   )}
-                </TableBaseBodyItem>
+                </TableBaseItem>
               ))}
             </TableRow>
           ))}
         </TableBaseBody>
+        <TableBaseFooter>
+          <TableRow>
+            <TableBaseItem>합계</TableBaseItem>
+            <TableBaseItem label="필건 총 합계">
+              {sumCalculate.sumTotalCnt.toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="면적 총 합계">
+              {sumCalculate.sumTotalArea.toFixed(2).toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="금액 총 합계">
+              {sumCalculate.sumTotalPrice.toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="협의 취득 필건 합계">
+              {sumCalculate.sumCnt.toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="협의 취득 면적 합계">
+              {sumCalculate.sumArea.toFixed(2).toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="협의 취득 금액 합계">
+              {sumCalculate.sumPrice.toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="재결 신청 필건 합계">
+              {sumCalculate.sumDecisionCnt.toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem label="재결 신청 면적 합계">
+              {sumCalculate.sumDecisionArea.toFixed(2).toLocaleString()}
+            </TableBaseItem>
+            <TableBaseItem>{sumCalculate.sumDecisionPrice.toLocaleString()}</TableBaseItem>
+          </TableRow>
+        </TableBaseFooter>
       </TableBaseContainer>
 
       <Box
@@ -153,7 +181,7 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({
         }}
       >
         <PrevButton onClick={handleBack} />
-        <NextButton onClick={handleNext} />
+        <NextButton type="submit" />
       </Box>
     </form>
   )
@@ -163,7 +191,11 @@ const totalQuantityReportLabels = [
   {
     label: '토 지',
     list: [
-      { id: 'totalLandCnt', disabled: true, fixedDecimalScale: false },
+      {
+        id: 'totalLandCnt',
+        disabled: true,
+        fixedDecimalScale: false,
+      },
       {
         id: 'totalLandArea',
         disabled: true,

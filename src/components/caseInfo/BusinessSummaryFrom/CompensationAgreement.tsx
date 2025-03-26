@@ -3,15 +3,15 @@ import PrevButton from '@components/common/button/PrevButton'
 import InputTextBox from '@components/common/form/InputTextBox'
 import LocalDatePicker from '@components/common/form/LocalDatePicker'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
-import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
-import TableBaseHeadItem from '@components/common/layout/table/base/TableBaseHeadItem'
 import { Box, Button, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
 import { useInsertOrUpdateAgreementDate } from '@/api/case-application-api/case-application-api'
+import TableBaseItem from '@/components/common/layout/table/base/TableBaseItem'
+import TableBaseLabelItem from '@/components/common/layout/table/base/TableBaseLabelItem'
 import { type AgreementDateEntity } from '@/model/agreementDateEntity'
 import { useShowAlertMessage } from '@/store/message'
 
@@ -70,29 +70,29 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({
       <TableBaseContainer title={'협의 내역'}>
         <TableBaseHead>
           <TableRow>
-            <TableBaseHeadItem label={'협의 날짜'} />
-            <TableBaseHeadItem label={'협의 내용'} />
-            <TableBaseHeadItem>
+            <TableBaseLabelItem label={'협의 날짜'} />
+            <TableBaseLabelItem label={'협의 내용'} />
+            <TableBaseLabelItem>
               <Button size={'large'} variant="contained" onClick={handleAppend}>
                 추가 하기
               </Button>
-            </TableBaseHeadItem>
+            </TableBaseLabelItem>
           </TableRow>
         </TableBaseHead>
         <TableBaseBody>
           {fields.map((field, index) => (
             <TableRow key={index}>
-              <TableBaseBodyItem>
+              <TableBaseItem>
                 <LocalDatePicker control={control} id={`AgreementDateList.${index}.title`} />
-              </TableBaseBodyItem>
-              <TableBaseBodyItem>
+              </TableBaseItem>
+              <TableBaseItem>
                 <InputTextBox
                   id={`AgreementDateList.${index}.content`}
                   register={register}
                   type={'text'}
                 />
-              </TableBaseBodyItem>
-              <TableBaseBodyItem>
+              </TableBaseItem>
+              <TableBaseItem>
                 <Button
                   size={'large'}
                   variant="outlined"
@@ -103,7 +103,7 @@ const CompensationAgreement: React.FC<CompensationAgreementProps> = ({
                 >
                   삭제 하기
                 </Button>
-              </TableBaseBodyItem>
+              </TableBaseItem>
             </TableRow>
           ))}
         </TableBaseBody>

@@ -2,15 +2,15 @@ import NextButton from '@components/common/button/NextButton'
 import PrevButton from '@components/common/button/PrevButton'
 import InputTextBox from '@components/common/form/InputTextBox'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
-import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
-import TableBaseHeadItem from '@components/common/layout/table/base/TableBaseHeadItem'
 import { Box, Button, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
 import { useInsertOrUpdateBusinessRecognition } from '@/api/case-application-api/case-application-api'
+import TableBaseItem from '@/components/common/layout/table/base/TableBaseItem'
+import TableBaseLabelItem from '@/components/common/layout/table/base/TableBaseLabelItem'
 import { type BusinessRecognitionEntity } from '@/model/businessRecognitionEntity'
 import { useShowAlertMessage } from '@/store/message'
 
@@ -69,33 +69,33 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({
       <TableBaseContainer title={'도시계획 [사업인정]관계'}>
         <TableBaseHead>
           <TableRow>
-            <TableBaseHeadItem label={'제목'} />
-            <TableBaseHeadItem label={'내용'} />
-            <TableBaseHeadItem>
+            <TableBaseLabelItem label={'제목'} />
+            <TableBaseLabelItem label={'내용'} />
+            <TableBaseLabelItem>
               <Button size={'large'} variant="contained" onClick={handleAppend}>
                 추가 하기
               </Button>
-            </TableBaseHeadItem>
+            </TableBaseLabelItem>
           </TableRow>
         </TableBaseHead>
         <TableBaseBody>
           {fields.map((field, index) => (
             <TableRow key={index}>
-              <TableBaseBodyItem>
+              <TableBaseItem>
                 <InputTextBox
                   id={`businessRecognitionList.${index}.title`}
                   register={register}
                   type={'text'}
                 />
-              </TableBaseBodyItem>
-              <TableBaseBodyItem>
+              </TableBaseItem>
+              <TableBaseItem>
                 <InputTextBox
                   id={`businessRecognitionList.${index}.content`}
                   register={register}
                   type={'text'}
                 />
-              </TableBaseBodyItem>
-              <TableBaseBodyItem>
+              </TableBaseItem>
+              <TableBaseItem>
                 <Button
                   size={'large'}
                   variant="outlined"
@@ -106,7 +106,7 @@ const BusinessRecognition: React.FC<BusinessRecognitionProps> = ({
                 >
                   삭제 하기
                 </Button>
-              </TableBaseBodyItem>
+              </TableBaseItem>
             </TableRow>
           ))}
         </TableBaseBody>

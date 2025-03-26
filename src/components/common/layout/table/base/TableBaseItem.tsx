@@ -1,11 +1,12 @@
 import { TableCell } from '@mui/material'
 import React, { type PropsWithChildren } from 'react'
 
-interface TableBaseBodyItemProps extends PropsWithChildren {
+interface TableBaseItemProps extends PropsWithChildren {
   align?: 'left' | 'center' | 'right'
+  label?: string
 }
 
-const TableBaseBodyItem: React.FC<TableBaseBodyItemProps> = ({ align = 'center', children }) => {
+const TableBaseItem: React.FC<TableBaseItemProps> = ({ align = 'center', label, children }) => {
   return (
     <>
       <TableCell
@@ -21,4 +22,4 @@ const TableBaseBodyItem: React.FC<TableBaseBodyItemProps> = ({ align = 'center',
     </>
   )
 }
-export default TableBaseBodyItem
+export default TableBaseItem

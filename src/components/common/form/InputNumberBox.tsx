@@ -12,6 +12,7 @@ interface InputNumberBoxProps<T extends FieldValues> {
   prefix?: string
   disabled?: boolean
   fixedDecimalScale?: boolean // 소수점 고정
+  value?: string | number
 }
 
 const MAX_LIMIT = 99999999999
@@ -19,6 +20,7 @@ const MAX_LIMIT = 99999999999
 const Base = styled.div`
   input {
     text-align: right;
+    margin-right: 5px;
   }
 `
 
@@ -29,13 +31,16 @@ const InputNumberBox: React.FC<InputNumberBoxProps<any>> = ({
   rules,
   disabled = false,
   fixedDecimalScale = false,
+  value,
 }) => {
   const { ref, ...rest } = register(id, rules)
   return (
     <Base>
       <NumericFormat
+        id={id}
         customInput={TextField}
         prefix={prefix}
+        value={value}
         variant="standard"
         {...rest}
         disabled={disabled}

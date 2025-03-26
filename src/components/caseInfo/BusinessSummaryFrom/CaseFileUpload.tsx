@@ -3,16 +3,16 @@ import PrevButton from '@components/common/button/PrevButton'
 import FileUploadInputBox from '@components/common/form/FileUploadInputBox'
 import InputTextBox from '@components/common/form/InputTextBox'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
-import TableBaseBodyItem from '@components/common/layout/table/base/TableBaseBodyItem'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
-import TableBaseHeadItem from '@components/common/layout/table/base/TableBaseHeadItem'
 import { Box, Button, Divider, TableRow } from '@mui/material'
 import React, { Fragment, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { IoAddCircle } from 'react-icons/io5'
 
 import { useInsertCaseFileUpload } from '@/api/case-application-api/case-application-api'
+import TableBaseItem from '@/components/common/layout/table/base/TableBaseItem'
+import TableBaseLabelItem from '@/components/common/layout/table/base/TableBaseLabelItem'
 import { type CaseInfoUploadFileRequest } from '@/model/caseInfoUploadFileRequest'
 import { useShowAlertMessage } from '@/store/message'
 
@@ -104,26 +104,26 @@ const CaseFileUpload: React.FC<CaseFileUploadProps> = ({
       <TableBaseContainer title={'첨부 파일'}>
         <TableBaseHead>
           <TableRow>
-            <TableBaseHeadItem width={200} label={'제목'} />
-            <TableBaseHeadItem label={'첨부 파일 설명'} />
-            <TableBaseHeadItem label={'첨부 파일'} />
+            <TableBaseLabelItem width={200} label={'제목'} />
+            <TableBaseLabelItem label={'첨부 파일 설명'} />
+            <TableBaseLabelItem label={'첨부 파일'} />
           </TableRow>
         </TableBaseHead>
         <TableBaseBody>
           {defaultAttachmentsState.map((item, index) => (
             <Fragment key={index}>
               <TableRow>
-                <TableBaseBodyItem align={'left'}>
+                <TableBaseItem align={'left'}>
                   {item.name !== undefined ? `${index + 1}. ${item.name}` : ''}
-                </TableBaseBodyItem>
-                <TableBaseBodyItem>
+                </TableBaseItem>
+                <TableBaseItem>
                   <InputTextBox
                     id={`implementerUploadFileRequestList.${index}.description`}
                     register={register}
                     type={'text'}
                   />
-                </TableBaseBodyItem>
-                <TableBaseBodyItem>
+                </TableBaseItem>
+                <TableBaseItem>
                   <Box display={'flex'}>
                     <FileUploadInputBox
                       control={control}
@@ -147,12 +147,12 @@ const CaseFileUpload: React.FC<CaseFileUploadProps> = ({
                       </>
                     )}
                   </Box>
-                </TableBaseBodyItem>
+                </TableBaseItem>
               </TableRow>
               {item?.sub?.map((subItem, subIndex) => (
                 <TableRow key={subIndex}>
-                  <TableBaseBodyItem></TableBaseBodyItem>
-                  <TableBaseBodyItem>
+                  <TableBaseItem></TableBaseItem>
+                  <TableBaseItem>
                     <InputTextBox
                       id={`implementerUploadFileRequestList.${index}.subImplementerUploadFile.${subIndex}.order`}
                       register={register}
@@ -166,15 +166,15 @@ const CaseFileUpload: React.FC<CaseFileUploadProps> = ({
                       register={register}
                       type={'text'}
                     />
-                  </TableBaseBodyItem>
-                  <TableBaseBodyItem>
+                  </TableBaseItem>
+                  <TableBaseItem>
                     <Box display={'flex'}>
                       <FileUploadInputBox
                         control={control}
                         id={`implementerUploadFileRequestList.${index}.subImplementerUploadFile.${subIndex}.file`}
                       />
                     </Box>
-                  </TableBaseBodyItem>
+                  </TableBaseItem>
                 </TableRow>
               ))}
             </Fragment>

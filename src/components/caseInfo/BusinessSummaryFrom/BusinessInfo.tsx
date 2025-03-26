@@ -9,7 +9,7 @@ import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 import {
-  useBusinessInfo,
+  useBusinessInfoByJudgSeq,
   useInsertOrUpdateBusinessInfo,
 } from '@/api/case-application-api/case-application-api'
 import { type BusinessInfoEntity } from '@/model'
@@ -23,7 +23,8 @@ interface BusinessInfoProps {
 
 const BusinessInfo: React.FC<BusinessInfoProps> = ({ judgSeq, handleNext, isButtonShown }) => {
   // 사업 개요 조회
-  const { data, isSuccess } = useBusinessInfo(judgSeq)
+  const { data, isSuccess } = useBusinessInfoByJudgSeq(judgSeq)
+
   if (isSuccess) {
     return (
       <BusinessInfoForm
