@@ -1,14 +1,12 @@
 import styled from '@emotion/styled/macro'
 import TextField from '@mui/material/TextField'
 import React from 'react'
-import { type FieldValues } from 'react-hook-form/dist/types/fields'
-import { type UseFormRegister } from 'react-hook-form/dist/types/form'
+import { type Control, Controller } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 
-interface InputNumberBoxProps<T extends FieldValues> {
+interface InputNumberBoxProps {
   id: string
-  register: UseFormRegister<T>
-  rules?: Record<string, any>
+  control: Control<any>
   prefix?: string
   disabled?: boolean
   fixedDecimalScale?: boolean // 소수점 고정
@@ -24,36 +22,47 @@ const Base = styled.div`
   }
 `
 
-const InputNumberBox: React.FC<InputNumberBoxProps<any>> = ({
+const InputNumberBox: React.FC<InputNumberBoxProps> = ({
   prefix = '',
   id,
-  register,
-  rules,
+  control,
   disabled = false,
   fixedDecimalScale = false,
   value,
 }) => {
-  const { ref, ...rest } = register(id, rules)
   return (
     <Base>
-      <NumericFormat
-        id={id}
-        customInput={TextField}
-        prefix={prefix}
-        value={value}
-        variant="standard"
-        {...rest}
-        disabled={disabled}
-        decimalScale={fixedDecimalScale ? 2 : 0}
-        thousandSeparator
-        valueIsNumericString
-        fixedDecimalScale
-        getInputRef={ref}
-        isAllowed={values => {
-          const { floatValue } = values
-          return (floatValue ?? 0) < MAX_LIMIT
-        }}
-        sx={{ backgroundColor: disabled ? '#0000000f' : '#fff' }}
+      <Controller
+        name={id}
+        control={control}
+        render={({ field }) => (
+          <NumericFormat
+            id={id}
+            customInput={TextField}
+            prefix={prefix}
+            value={value ?? field.value}
+            variant="standard"
+            disabled={disabled}
+            decimalScale={fixedDecimalScale ? 2 : 0}
+            thousandSeparator
+            valueIsNumericString
+            fixedDecimalScale
+            getInputRef={field.ref}
+            onValueChange={value => {
+              field.onChange({
+                target: {
+                  name: id,
+                  value: value.floatValue,
+                },
+              })
+            }}
+            isAllowed={values => {
+              const { floatValue } = values
+              return (floatValue ?? 0) < MAX_LIMIT
+            }}
+            sx={{ backgroundColor: disabled ? '#0000000f' : '#fff' }}
+          />
+        )}
       />
     </Base>
   )

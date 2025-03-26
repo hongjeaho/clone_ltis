@@ -67,7 +67,7 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
   isButtonShown,
 }) => {
   const showAlertMessage = useShowAlertMessage()
-  const { handleSubmit, register, control } = useForm<QuantityReportEntity>({
+  const { handleSubmit, control } = useForm<QuantityReportEntity>({
     defaultValues: defaultData,
   })
 
@@ -85,9 +85,8 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
   const onSubmit: SubmitHandler<QuantityReportEntity> = async data => {
     const inputData = Object.fromEntries(
       Object.entries(data)
-        .map(([key, value]) => [key, value === null ? '0' : value])
-        .map(([key, value]) => [key, value === '' ? '0' : value])
-        .map(([key, value]) => [key, parseFloat(value.replace(/,/g, ''))]),
+        .map(([key, value]) => [key, value === undefined ? 0 : value])
+        .map(([key, value]) => [key, value === '' ? 0 : value]),
     )
 
     mutate({
@@ -106,7 +105,7 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
       <TableBaseContainer title={`총 물량조서`}>
         <TableBaseHead>
           <TableRow>
-            <TableBaseLabelItem rowSpan={2} label={'구분'} />
+            <TableBaseLabelItem width={100} rowSpan={2} label={'구분'} />
             <TableBaseLabelItem colSpan={3} label={'총 보상대상'} />
             <TableBaseLabelItem colSpan={3} label={'협의취득 등'} />
             <TableBaseLabelItem colSpan={3} label={'재결신청'} />
@@ -130,8 +129,8 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
                       id={label.id}
                       disabled={label.disabled}
                       fixedDecimalScale={label.fixedDecimalScale}
-                      register={register}
-                      value={sumCalculate[label.id] ?? ''}
+                      control={control}
+                      value={sumCalculate[label.id]}
                     />
                   ) : (
                     '-'
@@ -140,15 +139,13 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
               ))}
             </TableRow>
           ))}
-        </TableBaseBody>
-        <TableBaseFooter>
           <TableRow>
             <TableBaseItem>합계</TableBaseItem>
             <TableBaseItem label="필건 총 합계">
               {sumCalculate.sumTotalCnt.toLocaleString()}
             </TableBaseItem>
             <TableBaseItem label="면적 총 합계">
-              {sumCalculate.sumTotalArea.toFixed(2).toLocaleString()}
+              {sumCalculate.sumTotalArea.toLocaleString()}
             </TableBaseItem>
             <TableBaseItem label="금액 총 합계">
               {sumCalculate.sumTotalPrice.toLocaleString()}
@@ -157,7 +154,7 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
               {sumCalculate.sumCnt.toLocaleString()}
             </TableBaseItem>
             <TableBaseItem label="협의 취득 면적 합계">
-              {sumCalculate.sumArea.toFixed(2).toLocaleString()}
+              {sumCalculate.sumArea.toLocaleString()}
             </TableBaseItem>
             <TableBaseItem label="협의 취득 금액 합계">
               {sumCalculate.sumPrice.toLocaleString()}
@@ -166,11 +163,12 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
               {sumCalculate.sumDecisionCnt.toLocaleString()}
             </TableBaseItem>
             <TableBaseItem label="재결 신청 면적 합계">
-              {sumCalculate.sumDecisionArea.toFixed(2).toLocaleString()}
+              {sumCalculate.sumDecisionArea.toLocaleString()}
             </TableBaseItem>
             <TableBaseItem>{sumCalculate.sumDecisionPrice.toLocaleString()}</TableBaseItem>
           </TableRow>
-        </TableBaseFooter>
+        </TableBaseBody>
+        <TableBaseFooter></TableBaseFooter>
       </TableBaseContainer>
 
       <Box
