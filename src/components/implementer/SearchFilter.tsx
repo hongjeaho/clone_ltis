@@ -7,14 +7,14 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
-import { type CaseInfoListParams } from '@/model'
+import { type GetCaseInfoListParams } from '@/model/getCaseInfoListParams'
 import { DecisionStepList } from '@/store'
 
 import TableLabelContainer from '../common/layout/table/label/TableLabelContainer'
 import TableLabelItem from '../common/layout/table/label/TableLabelItem'
 
 interface SearchFilterProps {
-  onSubmit: SubmitHandler<CaseInfoListParams>
+  onSubmit: SubmitHandler<GetCaseInfoListParams>
 }
 
 const Form = styled.form`
@@ -22,7 +22,7 @@ const Form = styled.form`
 `
 
 const SearchFilter: React.FC<SearchFilterProps> = ({ onSubmit }) => {
-  const { handleSubmit, register, control } = useForm<CaseInfoListParams>({
+  const { handleSubmit, register, control } = useForm<GetCaseInfoListParams>({
     defaultValues: {
       keyword: undefined,
       startRecepDt: undefined,

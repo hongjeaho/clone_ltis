@@ -1,13 +1,13 @@
+import AppraisalInfo from '@components/caseInfo/AppraisalInfo'
+import BusinessInfo from '@components/caseInfo/BusinessSummary'
+import CompensationAmountByOwnerInfo from '@components/caseInfo/CompensationAmountByOwnerInfo'
+import EtcInfo from '@components/caseInfo/EtcInfo'
+import ReportInfo from '@components/caseInfo/ReportInfo'
 import DecisionStep from '@components/common/DecisionStep'
-import AppraisalInfo from '@components/judgInfo/AppraisalInfo'
-import CompensationAmountByOwnerInfo from '@components/judgInfo/CompensationAmountByOwnerInfo'
-import EtcInfo from '@components/judgInfo/EtcInfo'
-import ReportInfo from '@components/judgInfo/ReportInfo'
 import { Box, Button, Stack } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 
 import Title from '@/components/base/title/Title'
-import BusinessInfo from '@/components/judgInfo/BusinessSummary'
 
 interface ImplementerDetailParams {
   judgSeq: number

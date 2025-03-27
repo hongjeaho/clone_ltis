@@ -1,25 +1,23 @@
-import NextButton from '@components/common/button/NextButton'
-import PrevButton from '@components/common/button/PrevButton'
+import InputNumberBox from '@components/common/form/InputNumberBox'
 import TableBaseBody from '@components/common/layout/table/base/TableBaseBody'
 import TableBaseContainer from '@components/common/layout/table/base/TableBaseContainer'
 import TableBaseHead from '@components/common/layout/table/base/TableBaseHead'
+import TableBaseItem from '@components/common/layout/table/base/TableBaseItem'
+import TableBaseLabelItem from '@components/common/layout/table/base/TableBaseLabelItem'
+import SkeletonLoading from '@components/common/SkeletonLoading'
+import NextButton from '@components/implementer/button/NextButton'
+import PrevButton from '@components/implementer/button/PrevButton'
+import useSumCalculator from '@components/implementer/caseInfoFrom/hook/useSumCalculator'
 import { Box, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 import {
+  useGetQuantityReportByJudgSeq,
   useInsertOrUpdateQuantityReport,
-  useQuantityReportByJudgSeq,
 } from '@/api/case-application-api/case-application-api'
-import InputNumberBox from '@/components/common/form/InputNumberBox'
-import TableBaseFooter from '@/components/common/layout/table/base/TableBaseFooter'
-import TableBaseItem from '@/components/common/layout/table/base/TableBaseItem'
-import TableBaseLabelItem from '@/components/common/layout/table/base/TableBaseLabelItem'
-import SkeletonLoading from '@/components/common/SkeletonLoading'
 import { type QuantityReportEntity } from '@/model/quantityReportEntity'
 import { useShowAlertMessage } from '@/store/message'
-
-import useSumCalcuate from './hook/useSumCalcuate'
 
 interface TotalQuantityReportProps {
   handleNext: () => void
@@ -34,7 +32,7 @@ const TotalQuantityReport: React.FC<TotalQuantityReportProps> = ({
   handleBack,
   isButtonShown,
 }) => {
-  const { data, isSuccess } = useQuantityReportByJudgSeq(judgSeq)
+  const { data, isSuccess } = useGetQuantityReportByJudgSeq(judgSeq)
 
   if (isSuccess) {
     return (
@@ -71,7 +69,7 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
     defaultValues: defaultData,
   })
 
-  const sumCalculate = useSumCalcuate({ control })
+  const sumCalculate = useSumCalculator({ control })
 
   const { mutate } = useInsertOrUpdateQuantityReport({
     mutation: {
@@ -168,7 +166,6 @@ const TotalQuantityReportForm: React.FC<TotalQuantityReportFromProps> = ({
             <TableBaseItem>{sumCalculate.sumDecisionPrice.toLocaleString()}</TableBaseItem>
           </TableRow>
         </TableBaseBody>
-        <TableBaseFooter></TableBaseFooter>
       </TableBaseContainer>
 
       <Box

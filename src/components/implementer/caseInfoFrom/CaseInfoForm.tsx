@@ -1,22 +1,20 @@
-import NextButton from '@components/common/button/NextButton'
-import PrevButton from '@components/common/button/PrevButton'
+import NextButton from '@components/implementer/button/NextButton'
+import PrevButton from '@components/implementer/button/PrevButton'
+import AgreementDate from '@components/implementer/caseInfoFrom/AgreementDate'
+import BusinessInfo from '@components/implementer/caseInfoFrom/BusinessInfo'
+import BusinessRecognition from '@components/implementer/caseInfoFrom/BusinessRecognition'
+import CaseFileUpload from '@components/implementer/caseInfoFrom/CaseFileUpload'
+import TotalQuantityReport from '@components/implementer/caseInfoFrom/TotalQuantityReport'
 import { Box, Step, StepLabel } from '@mui/material'
 import Stepper from '@mui/material/Stepper/Stepper'
 import React, { type ReactNode, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import BusinessRecognition from '@/components/caseInfo/BusinessSummaryFrom/BusinessRecognition'
-import CaseFileUpload from '@/components/caseInfo/BusinessSummaryFrom/CaseFileUpload'
-import CompensationAgreement from '@/components/caseInfo/BusinessSummaryFrom/CompensationAgreement'
-import TotalQuantityReport from '@/components/caseInfo/BusinessSummaryFrom/TotalQuantityReport'
-
-import BusinessInfo from './BusinessInfo'
-
 interface Params {
   judgSeq: number
 }
 
-const BusinessSummeryFrom: React.FC = () => {
+const CaseInfoForm: React.FC = () => {
   const { judgSeq } = useParams() as unknown as Readonly<Params>
 
   const [activeStep, setActiveStep] = useState(0)
@@ -56,6 +54,7 @@ const BusinessSummeryFrom: React.FC = () => {
         label: '사업인정관계',
         component: (
           <BusinessRecognition
+            judgSeq={judgSeq}
             handleNext={handleNext}
             handleBack={handleBack}
             isButtonShown={activeStep === 2}
@@ -65,7 +64,8 @@ const BusinessSummeryFrom: React.FC = () => {
       {
         label: '협의 날짜',
         component: (
-          <CompensationAgreement
+          <AgreementDate
+            judgSeq={judgSeq}
             handleNext={handleNext}
             handleBack={handleBack}
             isButtonShown={activeStep === 3}
@@ -76,6 +76,7 @@ const BusinessSummeryFrom: React.FC = () => {
         label: '첨부 파일',
         component: (
           <CaseFileUpload
+            judgSeq={judgSeq}
             handleNext={handleNext}
             handleBack={handleBack}
             isButtonShown={activeStep === 4}
@@ -122,4 +123,4 @@ const BusinessSummeryFrom: React.FC = () => {
   )
 }
 
-export default BusinessSummeryFrom
+export default CaseInfoForm

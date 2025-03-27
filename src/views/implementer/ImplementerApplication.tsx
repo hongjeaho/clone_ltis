@@ -4,16 +4,16 @@ import React, { useCallback, useState } from 'react'
 import { type SubmitHandler } from 'react-hook-form'
 import { FaRegFilePdf } from 'react-icons/fa6'
 
-import { useCaseInfoList } from '@/api/case-application-api/case-application-api'
+import { useGetCaseInfoList } from '@/api/case-application-api/case-application-api'
 import Title from '@/components/base/title/Title'
 import SearchBox from '@/components/implementer/SearchFilter'
-import { type CaseInfoListParams } from '@/model/caseInfoListParams'
+import { type GetCaseInfoListParams } from '@/model/getCaseInfoListParams'
 
 const ImplementerApplication: React.FC = () => {
-  const [searchParam, setSearchParam] = useState<CaseInfoListParams>({})
+  const [searchParam, setSearchParam] = useState<GetCaseInfoListParams>({})
 
   // SearchForm 제출 시 호출되는 함수
-  const handleSearchSubmit: SubmitHandler<CaseInfoListParams> = async data => {
+  const handleSearchSubmit: SubmitHandler<GetCaseInfoListParams> = async data => {
     setSearchParam(params => ({ ...params, ...data, pag: 0, pageSize: 10 }))
   }
 
@@ -27,7 +27,7 @@ const ImplementerApplication: React.FC = () => {
     setSearchParam(currentParam => ({ ...currentParam, pageSize, page: 0 }))
   }, [])
 
-  const { data, isLoading } = useCaseInfoList({ ...searchParam })
+  const { data, isLoading } = useGetCaseInfoList({ ...searchParam })
 
   return (
     <>

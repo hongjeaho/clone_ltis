@@ -8,7 +8,7 @@ interface Props {
   control: Control<any>
 }
 
-const useSumCalcuate = ({ control }: Props) => {
+const useSumCalculator = ({ control }: Props) => {
   const sumCntCalculate: Record<string, number> = useSumCntCalculate({ control })
   const sumAreaCalculate: Record<string, number> = useSumAreaCalculate({ control })
   const sumPriceCalculate: Record<string, number> = useSumPriceCalculate({ control })
@@ -20,4 +20,4 @@ const useSumCalcuate = ({ control }: Props) => {
   }
 }
 
-export default useSumCalcuate
+export default useSumCalculator

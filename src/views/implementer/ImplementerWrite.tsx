@@ -1,12 +1,11 @@
 import Title from '@components/base/title/Title'
+import BusinessInfo from '@components/caseInfo/BusinessSummary'
 import DecisionStep from '@components/common/DecisionStep'
+import CaseInfoForm from '@components/implementer/caseInfoFrom/CaseInfoForm'
 import { Button, Stack } from '@mui/material'
 import Box from '@mui/material/Box/Box'
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-
-import BusinessSummaryFrom from '@/components/caseInfo/BusinessSummaryFrom'
-import BusinessInfo from '@/components/judgInfo/BusinessSummary'
 
 interface ImplementerWriteParams {
   judgSeq: number
@@ -23,7 +22,7 @@ const ImplementerWrite: React.FC = () => {
 
         <BusinessInfo judgSeq={judgSeq} />
 
-        <BusinessSummaryFrom />
+        <CaseInfoForm />
 
         <Stack justifyContent={'center'} spacing={2} direction={'row'} sx={{ paddingTop: 5 }}>
           <Button

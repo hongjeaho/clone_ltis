@@ -1,15 +1,15 @@
-import NextButton from '@components/common/button/NextButton'
 import InputRadioBox from '@components/common/form/InputRadioBox'
 import InputTextBox from '@components/common/form/InputTextBox'
 import TableLabelContainer from '@components/common/layout/table/label/TableLabelContainer'
 import TableLabelItem from '@components/common/layout/table/label/TableLabelItem'
 import SkeletonLoading from '@components/common/SkeletonLoading'
+import NextButton from '@components/implementer/button/NextButton'
 import { Box, TableRow } from '@mui/material'
 import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 import {
-  useBusinessInfoByJudgSeq,
+  useGetBusinessInfoByJudgSeq,
   useInsertOrUpdateBusinessInfo,
 } from '@/api/case-application-api/case-application-api'
 import { type BusinessInfoEntity } from '@/model'
@@ -23,7 +23,7 @@ interface BusinessInfoProps {
 
 const BusinessInfo: React.FC<BusinessInfoProps> = ({ judgSeq, handleNext, isButtonShown }) => {
   // 사업 개요 조회
-  const { data, isSuccess } = useBusinessInfoByJudgSeq(judgSeq)
+  const { data, isSuccess } = useGetBusinessInfoByJudgSeq(judgSeq)
 
   if (isSuccess) {
     return (

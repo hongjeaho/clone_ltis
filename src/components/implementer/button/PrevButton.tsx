@@ -8,6 +8,7 @@ interface PrevButtonProps {
 const PrevButton: React.FC<PrevButtonProps> = ({ onClick }) => {
   return (
     <Button
+      type={'button'}
       size={'large'}
       variant="contained"
       onClick={onClick}
